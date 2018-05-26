@@ -1,0 +1,59 @@
+{
+  "project_info": {
+    "project_number": "56068112480",
+    "firebase_url": "https://sqclubside.firebaseio.com",
+    "project_id": "sqclubside",
+    "storage_bucket": "sqclubside.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:56068112480:android:12c9fba1cfd044f6",
+        "android_client_info": {
+          "package_name": "ir.sq.apps.sqclubside"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "56068112480-0vc72hepqnlc4q5h54phsqm7i655fts4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ir.sq.apps.sqclubside",
+            "certificate_hash": "3fdce92ab1f88d4bbeac35e3451f6a142097d525"
+          }
+        },
+        {
+          "client_id": "56068112480-5umsovjnf4jgbehds29nri1psvtsiv8q.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "56068112480-5umsovjnf4jgbehds29nri1psvtsiv8q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_4hv2MCQtRBbmy9Fm22ZoMHeTVTKkENk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "56068112480-5umsovjnf4jgbehds29nri1psvtsiv8q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
