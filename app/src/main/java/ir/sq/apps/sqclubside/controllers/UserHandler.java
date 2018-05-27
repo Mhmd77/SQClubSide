@@ -27,11 +27,11 @@ public class UserHandler {
         mClub = new Club(name, owner, tele, cell, address);
     }
 
-    private void setImages(List<Bitmap> images) {
+    public void setImages(List<Bitmap> images) {
         mClub.addImages(images);
     }
 
-    private void setTags(List<String> tags) {
+    public void setTags(List<String> tags) {
         mClub.addTags(tags);
     }
 

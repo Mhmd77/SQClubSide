@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.CAMERA"/>
 
     <application
         android:allowBackup="true"
@@ -26,7 +27,7 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".ClubLocationActivity"
+            android:name=".activities.ClubLocationActivity"
             android:label="@string/title_activity_club_location" />
         <activity android:name=".activities.ImageActivity"></activity>
     </application>

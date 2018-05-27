@@ -1,9 +1,7 @@
 package ir.sq.apps.sqclubside.activities;
 
 import android.content.Intent;
-import android.location.Address;
 import android.os.Bundle;
-import android.os.UserHandle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -21,16 +19,12 @@ import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.Places;
 import com.google.android.gms.location.places.ui.PlacePicker;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import ir.sq.apps.sqclubside.ClubLocationActivity;
-import ir.sq.apps.sqclubside.ConnectionUi;
+import ir.sq.apps.sqclubside.uiControllers.ConnectionUi;
 import ir.sq.apps.sqclubside.R;
-import ir.sq.apps.sqclubside.TypeFaceHandler;
+import ir.sq.apps.sqclubside.uiControllers.TypeFaceHandler;
 import ir.sq.apps.sqclubside.controllers.Connection;
 import ir.sq.apps.sqclubside.controllers.UrlHandler;
 import ir.sq.apps.sqclubside.controllers.UserHandler;
@@ -75,6 +69,7 @@ public class FormActivity extends AppCompatActivity {
     private EditText[] allEditTexts;
     private GoogleApiClient mGoogleApiClient;
     private int PLACE_PICKER_REQUEST = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,6 +89,7 @@ public class FormActivity extends AppCompatActivity {
                 })
                 .build();
     }
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -105,6 +101,7 @@ public class FormActivity extends AppCompatActivity {
         mGoogleApiClient.disconnect();
         super.onStop();
     }
+
     private void setViews() {
         allEditTexts = new EditText[5];
         allEditTexts[0] = clubNameEdittext;
@@ -148,12 +145,14 @@ public class FormActivity extends AppCompatActivity {
                 }
                 break;
             case R.id.submit_information_button:
-                if (checkEmptyFields()) {
-//                    sendUserToServer();
-                }
+              /*  if (checkEmptyFields()) {
+                    sendUserToServer();
+                }*/
+                startActivity(new Intent(FormActivity.this, ImageActivity.class));
                 break;
         }
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == PLACE_PICKER_REQUEST) {
@@ -179,6 +178,7 @@ public class FormActivity extends AppCompatActivity {
             }
         }
     }
+
     private void sendUserToServer() {
         UserHandler.getInstance().createClub(allEditTexts[0].getText().toString(), clubOwnerEdittext.getText().toString(),
                 clubTelephonenumberEdittext.getText().toString(), clubCellphonenumberEdittext.getText().toString(), clubAddressEdittext.getText().toString());

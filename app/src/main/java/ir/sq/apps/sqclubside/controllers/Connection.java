@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -16,12 +15,10 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.net.ssl.HttpsURLConnection;
 
-import ir.sq.apps.sqclubside.ConnectionUi;
+import ir.sq.apps.sqclubside.uiControllers.ConnectionUi;
 
 
 public abstract class Connection extends AsyncTask<Void, Void, String> {

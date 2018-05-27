@@ -1,4 +1,4 @@
-package ir.sq.apps.sqclubside;
+package ir.sq.apps.sqclubside.uiControllers;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -7,6 +7,8 @@ import android.content.DialogInterface;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.res.ResourcesCompat;
 import android.widget.TextView;
+
+import ir.sq.apps.sqclubside.R;
 
 
 public class DialogHandler {

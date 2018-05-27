@@ -1,4 +1,4 @@
-package ir.sq.apps.sqclubside;
+package ir.sq.apps.sqclubside.activities;
 
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -15,6 +15,8 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import ir.sq.apps.sqclubside.R;
 
 public class ClubLocationActivity extends FragmentActivity implements LocationListener, OnMapReadyCallback {
 

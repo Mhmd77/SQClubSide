@@ -1,4 +1,4 @@
-package ir.sq.apps.sqclubside;
+package ir.sq.apps.sqclubside.uiControllers;
 
 import android.app.ProgressDialog;
 import android.content.Context;
