@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">SQClubSide</string>
     <string name="title_activity_club_location">نقشه باشگاه</string>
+    <string name="empty_field_error_meesage">این فیلد نمی تواند خالی باشد</string>
 </resources>

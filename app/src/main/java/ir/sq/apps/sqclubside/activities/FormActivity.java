@@ -2,13 +2,12 @@ package ir.sq.apps.sqclubside.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-
-import java.util.Optional;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -43,6 +42,18 @@ public class FormActivity extends AppCompatActivity {
     Button clubLocationButton;
     @BindView(R.id.submit_information_button)
     Button submitInformationButton;
+    @BindView(R.id.club_name_input)
+    TextInputLayout clubNameInput;
+    @BindView(R.id.club_owner_input)
+    TextInputLayout clubOwnerInput;
+    @BindView(R.id.club_telephonenumber_input)
+    TextInputLayout clubTelephonenumberInput;
+    @BindView(R.id.club_cellphonenumber_input)
+    TextInputLayout clubCellphonenumberInput;
+    @BindView(R.id.club_address_input)
+    TextInputLayout clubAddressInput;
+
+    private EditText[] allEditTexts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +61,16 @@ public class FormActivity extends AppCompatActivity {
         setContentView(R.layout.activity_form);
         ButterKnife.bind(this);
         setFonts();
+        setViews();
+    }
+
+    private void setViews() {
+        allEditTexts = new EditText[5];
+        allEditTexts[0] = clubNameEdittext;
+        allEditTexts[1] = clubOwnerEdittext;
+        allEditTexts[2] = clubTelephonenumberEdittext;
+        allEditTexts[3] = clubCellphonenumberEdittext;
+        allEditTexts[4] = clubAddressEdittext;
     }
 
     private void setFonts() {
@@ -65,6 +86,11 @@ public class FormActivity extends AppCompatActivity {
         clubAddressEdittext.setTypeface(TypeFaceHandler.getInstance(this).getFa_bold());
         clubLocationButton.setTypeface(TypeFaceHandler.getInstance(this).getFa_bold());
         submitInformationButton.setTypeface(TypeFaceHandler.getInstance(this).getFa_bold());
+        clubNameInput.setTypeface(TypeFaceHandler.getInstance(this).getFa_bold());
+        clubTelephonenumberInput.setTypeface(TypeFaceHandler.getInstance(this).getFa_bold());
+        clubCellphonenumberInput.setTypeface(TypeFaceHandler.getInstance(this).getFa_bold());
+        clubAddressInput.setTypeface(TypeFaceHandler.getInstance(this).getFa_bold());
+        clubOwnerInput.setTypeface(TypeFaceHandler.getInstance(this).getFa_bold());
     }
 
 
@@ -72,10 +98,22 @@ public class FormActivity extends AppCompatActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.club_location_button:
-                break;
-            case R.id.submit_information_button:
                 startActivity(new Intent(FormActivity.this, ClubLocationActivity.class));
                 break;
+            case R.id.submit_information_button:
+                checkEmptyFields();
+                break;
         }
+    }
+
+    private Boolean checkEmptyFields() {
+        Boolean flag = true;
+        for (EditText e : allEditTexts) {
+            if (e.getText().toString().length() == 0) {
+                e.setError(getString(R.string.empty_field_error_meesage));
+                flag = false;
+            }
+        }
+        return flag;
     }
 }
