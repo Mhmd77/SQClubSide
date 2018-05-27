@@ -101,7 +101,9 @@ public class FormActivity extends AppCompatActivity {
                 startActivity(new Intent(FormActivity.this, ClubLocationActivity.class));
                 break;
             case R.id.submit_information_button:
-                checkEmptyFields();
+                if (checkEmptyFields()) {
+                    finish();
+                }
                 break;
         }
     }
