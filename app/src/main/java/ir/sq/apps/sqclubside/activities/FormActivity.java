@@ -2,19 +2,28 @@ package ir.sq.apps.sqclubside.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ir.sq.apps.sqclubside.ClubLocationActivity;
+import ir.sq.apps.sqclubside.ConnectionUi;
 import ir.sq.apps.sqclubside.R;
 import ir.sq.apps.sqclubside.TypeFaceHandler;
+import ir.sq.apps.sqclubside.controllers.Connection;
+import ir.sq.apps.sqclubside.controllers.UrlHandler;
+import ir.sq.apps.sqclubside.controllers.UserHandler;
 
 public class FormActivity extends AppCompatActivity {
 
@@ -102,10 +111,22 @@ public class FormActivity extends AppCompatActivity {
                 break;
             case R.id.submit_information_button:
                 if (checkEmptyFields()) {
-                    finish();
+                    sendUserToServer();
                 }
                 break;
         }
+    }
+
+    private void sendUserToServer() {
+        UserHandler.getInstance().createClub(allEditTexts[0].getText().toString(), clubOwnerEdittext.getText().toString(),
+                clubTelephonenumberEdittext.getText().toString(), clubCellphonenumberEdittext.getText().toString(), clubAddressEdittext.getText().toString());
+        Connection connection = new Connection(UrlHandler.createUserURL.toString(), UserHandler.getInstance().getmClub().toJson(), ConnectionUi.getDefault(this)) {
+            @Override
+            protected void onResult(String result) {
+                Log.i("RESULT", result);
+            }
+        };
+        connection.execute();
     }
 
     private Boolean checkEmptyFields() {

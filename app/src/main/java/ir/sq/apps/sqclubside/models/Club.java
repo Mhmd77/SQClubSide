@@ -5,7 +5,9 @@ import android.graphics.Bitmap;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Mohammad on 5/27/2018.
@@ -24,7 +26,7 @@ public class Club {
     private String owner;
     private String telePhoneNumber;
     private String cellPhoneNumber;
-    private String adress;
+    private String address;
     private String openTime;
     private String price;
     private String closeTime;
@@ -37,7 +39,7 @@ public class Club {
         this.owner = owner;
         this.telePhoneNumber = telePhoneNumber;
         this.cellPhoneNumber = cellPhoneNumber;
-        this.adress = adress;
+        this.address = adress;
     }
 
     public void addImages(List<Bitmap> images) {
@@ -48,18 +50,20 @@ public class Club {
         this.tags.addAll(tags);
     }
 
-    private String toJson() throws JSONException {
+    public String toJson() {
         JSONObject object = new JSONObject();
-        object.put("name", name);
-        object.put("owner", owner);
-        object.put("telePhoneNumber", telePhoneNumber);
-        object.put("cellPhoneNumber", cellPhoneNumber);
-        object.put("adress", adress);
-        object.put("latitude", latitude);
-        object.put("longtitude", longtitude);
-        object.put("ownerUserName", ownerUserName);
+        try {
+            object.put("name", name);
+            object.put("owner", owner);
+            object.put("telePhoneNumber", telePhoneNumber);
+            object.put("cellPhoneNumber", cellPhoneNumber);
+            object.put("address", address);
+            object.put("latitude", latitude);
+            object.put("longtitude", longtitude);
+            object.put("ownerUserName", ownerUserName);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         return object.toString();
     }
-
-
 }

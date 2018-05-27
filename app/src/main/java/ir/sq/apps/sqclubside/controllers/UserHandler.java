@@ -10,18 +10,20 @@ import ir.sq.apps.sqclubside.models.Club;
  * Created by Mohammad on 5/27/2018.
  */
 
-class UserHandler {
+public class UserHandler {
     private static final UserHandler ourInstance = new UserHandler();
+
+
     private Club mClub;
 
-    static UserHandler getInstance() {
+    public static UserHandler getInstance() {
         return ourInstance;
     }
 
     private UserHandler() {
     }
 
-    private void createClub(String name, String owner, String tele, String cell, String address) {
+    public void createClub(String name, String owner, String tele, String cell, String address) {
         mClub = new Club(name, owner, tele, cell, address);
     }
 
@@ -32,8 +34,13 @@ class UserHandler {
     private void setTags(List<String> tags) {
         mClub.addTags(tags);
     }
+
     //TODO Complete WeeklyPlan
     private void setPlan() {
 
+    }
+
+    public Club getmClub() {
+        return mClub;
     }
 }
