@@ -15,11 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".activities.FormActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <meta-data
@@ -27,7 +23,15 @@
             android:value="@string/google_maps_key" />
 
         <activity android:name=".activities.ImageActivity" />
-        <activity android:name=".activities.TagsActivity"></activity>
+        <activity android:name=".activities.TagsActivity" />
+        <activity
+            android:name=".activities.SignUpLogin">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
