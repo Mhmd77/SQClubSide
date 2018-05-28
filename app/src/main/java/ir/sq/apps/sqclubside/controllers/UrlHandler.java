@@ -5,9 +5,10 @@ package ir.sq.apps.sqclubside.controllers;
  */
 
 public enum UrlHandler {
-    createUserURL("http://192.168.43.82:8080/api/clubs/123"),
+    createUserURL("clubs/123"),
     updateUserURL("");
     private String url;
+    private String baseUrl = "http://192.168.43.82:8080/api/";
 
     private UrlHandler(String url) {
         this.url = url;
@@ -15,6 +16,6 @@ public enum UrlHandler {
 
     @Override
     public String toString() {
-        return url;
+        return baseUrl + url;
     }
 }

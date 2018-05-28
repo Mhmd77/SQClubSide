@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/backgroundColor"
     android:fillViewport="true"
     android:orientation="vertical"
     tools:context="ir.sq.apps.sqclubside.activities.FormActivity">
@@ -26,9 +27,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="3dp"
-            android:padding="5dp"
             android:background="@drawable/background_input_fields"
             android:hint="نام باشگاه"
+            android:padding="5dp"
             android:textColorHint="#b0b1c4">
 
 
@@ -55,10 +56,10 @@
             android:id="@+id/club_owner_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="5dp"
             android:layout_margin="3dp"
             android:background="@drawable/background_input_fields"
             android:hint="نام مدیر"
+            android:padding="5dp"
             android:textColorHint="#b0b1c4">
 
             <EditText
@@ -82,10 +83,10 @@
             android:id="@+id/club_telephonenumber_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="5dp"
             android:layout_margin="3dp"
             android:background="@drawable/background_input_fields"
             android:hint="تلفن ثابت"
+            android:padding="5dp"
             android:textColorHint="#b0b1c4">
 
             <EditText
@@ -110,10 +111,10 @@
             android:id="@+id/club_cellphonenumber_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="5dp"
             android:layout_margin="3dp"
             android:background="@drawable/background_input_fields"
             android:hint="تلفن همراه"
+            android:padding="5dp"
             android:textColorHint="#b0b1c4">
 
             <EditText
@@ -139,10 +140,10 @@
             android:id="@+id/club_address_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="5dp"
             android:layout_margin="3dp"
             android:background="@drawable/background_input_fields"
             android:hint="آدرس باشگاه"
+            android:padding="5dp"
             android:textColorHint="#b0b1c4">
 
             <EditText
@@ -172,9 +173,9 @@
             android:id="@+id/submit_information_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
             android:background="@drawable/background_color_button"
             android:text="ثبت اطلاعات"
-            android:layout_marginBottom="5dp"
             android:textColor="#FFF" />
 
     </LinearLayout>
