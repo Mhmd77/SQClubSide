@@ -6,9 +6,11 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import com.mvc.imagepicker.ImagePicker;
 
@@ -19,7 +21,12 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ir.sq.apps.sqclubside.R;
+import ir.sq.apps.sqclubside.controllers.Connection;
+import ir.sq.apps.sqclubside.controllers.ImageHandler;
+import ir.sq.apps.sqclubside.controllers.UrlHandler;
 import ir.sq.apps.sqclubside.controllers.UserHandler;
+import ir.sq.apps.sqclubside.models.Club;
+import ir.sq.apps.sqclubside.uiControllers.ConnectionUi;
 import ir.sq.apps.sqclubside.uiControllers.ImagePreviewAdapter;
 import ir.sq.apps.sqclubside.uiControllers.TypeFaceHandler;
 
@@ -32,6 +39,8 @@ public class ImageActivity extends AppCompatActivity implements ImagePreviewAdap
     ImageView imageHeader;
     @BindView(R.id.submit_images_button)
     Button submitImagesButton;
+    @BindView(R.id.image_header_holder)
+    RelativeLayout imageHeaderHolder;
 
     private List<Bitmap> images = new ArrayList<>();
     private ImagePicker imagePicker;
@@ -72,6 +81,9 @@ public class ImageActivity extends AppCompatActivity implements ImagePreviewAdap
         super.onActivityResult(requestCode, resultCode, data);
         Bitmap bitmap = ImagePicker.getImageFromResult(this, requestCode, resultCode, data);
         if (bitmap != null) {
+            if (images.size() == 0) {
+                imageHeaderHolder.setVisibility(View.VISIBLE);
+            }
             images.add(bitmap);
             adapter.notifyDataSetChanged();
             imageHeader.setImageBitmap(bitmap);
@@ -86,7 +98,23 @@ public class ImageActivity extends AppCompatActivity implements ImagePreviewAdap
                 break;
             case R.id.submit_images_button:
                 UserHandler.getInstance().setImages(images);
+                UserHandler.getInstance().getmClub().imagesToJson();
+//                if (images.size() > 0) {
+//                    sendImagesToServer();
+//                }
+//                startActivity(new Intent(ImageActivity.this, TagsActivity.class));
                 break;
+
         }
+    }
+
+    private void sendImagesToServer() {
+        Connection sendImages = new Connection(UrlHandler.updateUserURL.toString(), UserHandler.getInstance().getmClub().imagesToJson(), "PUT", ConnectionUi.noneUi(this)) {
+            @Override
+            protected void onResult(String result) {
+                Log.i("Result SITS", result);
+            }
+        };
+        sendImages.execute();
     }
 }

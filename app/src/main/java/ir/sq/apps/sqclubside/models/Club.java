@@ -1,13 +1,18 @@
 package ir.sq.apps.sqclubside.models;
 
 import android.graphics.Bitmap;
+import android.util.Log;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import ir.sq.apps.sqclubside.controllers.ImageHandler;
 
 /**
  * Created by Mohammad on 5/27/2018.
@@ -40,6 +45,8 @@ public class Club {
         this.telePhoneNumber = telePhoneNumber;
         this.cellPhoneNumber = cellPhoneNumber;
         this.address = adress;
+        images = new ArrayList<>();
+        tags = new ArrayList<>();
     }
 
     public void addImages(List<Bitmap> images) {
@@ -50,7 +57,7 @@ public class Club {
         this.tags.addAll(tags);
     }
 
-    public String toJson() {
+    public String formToJson() {
         JSONObject object = new JSONObject();
         try {
             object.put("name", name);
@@ -61,6 +68,23 @@ public class Club {
             object.put("latitude", latitude);
             object.put("longtitude", longtitude);
             object.put("ownerUserName", ownerUserName);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return object.toString();
+    }
+
+    public String imagesToJson() {
+        JSONObject object = new JSONObject();
+        JSONArray imageArray = new JSONArray();
+        try {
+            for (Bitmap bitmap : images) {
+                imageArray.put(ImageHandler.getImageEncoded(bitmap));
+            }
+            object.put("images", imageArray);
+            object.put("ownerUserName", ownerUserName);
+            object.put("type", "1");
+            Log.i("Image Json", object.toString());
         } catch (JSONException e) {
             e.printStackTrace();
         }

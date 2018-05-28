@@ -9,9 +9,11 @@
     android:background="@color/backgroundColor"
     tools:context="ir.sq.apps.sqclubside.activities.ImageActivity">
     <RelativeLayout
+        android:id="@+id/image_header_holder"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_margin="8dp"
+        android:visibility="gone"
         android:layout_weight="0.4"
         android:background="@drawable/background_round_image">
 

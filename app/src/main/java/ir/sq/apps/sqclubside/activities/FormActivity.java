@@ -136,7 +136,6 @@ public class FormActivity extends AppCompatActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.club_location_button:
-//                startActivity(new Intent(FormActivity.this, ClubLocationActivity.class));
                 PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
                 try {
                     startActivityForResult(builder.build(FormActivity.this), PLACE_PICKER_REQUEST);
@@ -145,9 +144,9 @@ public class FormActivity extends AppCompatActivity {
                 }
                 break;
             case R.id.submit_information_button:
-              /*  if (checkEmptyFields()) {
+                if (checkEmptyFields()) {
                     sendUserToServer();
-                }*/
+                }
                 startActivity(new Intent(FormActivity.this, ImageActivity.class));
                 break;
         }
@@ -182,13 +181,16 @@ public class FormActivity extends AppCompatActivity {
     private void sendUserToServer() {
         UserHandler.getInstance().createClub(allEditTexts[0].getText().toString(), clubOwnerEdittext.getText().toString(),
                 clubTelephonenumberEdittext.getText().toString(), clubCellphonenumberEdittext.getText().toString(), clubAddressEdittext.getText().toString());
-        Connection connection = new Connection(UrlHandler.createUserURL.toString(), UserHandler.getInstance().getmClub().toJson(), ConnectionUi.getDefault(this)) {
-            @Override
-            protected void onResult(String result) {
-                Log.i("RESULT", result);
-            }
-        };
-        connection.execute();
+//        Connection connection = new Connection(UrlHandler.createUserURL.toString(), UserHandler.getInstance().getmClub().formToJson(), "POST", ConnectionUi.getDefault(this)) {
+//            @Override
+//            protected void onResult(String result) {
+//                if (result.length() == 0) {
+//                    Log.e("ERROR", "FAILED");
+//                }
+//                Log.i("RESULT", result);
+//            }
+//        };
+//        connection.execute();
     }
 
     private Boolean checkEmptyFields() {

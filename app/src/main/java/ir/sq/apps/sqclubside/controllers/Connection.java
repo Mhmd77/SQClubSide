@@ -27,11 +27,13 @@ public abstract class Connection extends AsyncTask<Void, Void, String> {
     private ConnectionUi connectionUi;
     private HttpURLConnection connection;
     private String data;
+    private String reqMethod;
 
-    public Connection(String urlString, String data, ConnectionUi connectionUi) {
+    public Connection(String urlString, String data, String reqMethod, ConnectionUi connectionUi) {
         this.connectionUi = connectionUi;
         this.urlString = urlString;
         this.data = data;
+        this.reqMethod = reqMethod;
     }
 
     public static boolean isConnected(Context context) {
@@ -60,14 +62,14 @@ public abstract class Connection extends AsyncTask<Void, Void, String> {
             URL url = new URL(urlString);
             connection = (HttpURLConnection) url.openConnection();
             connection.setReadTimeout(1000);
-            connection.setRequestMethod("POST");
+            connection.setRequestMethod(reqMethod);
             connection.setDoOutput(true);
             connection.setDoInput(true);
             connection.setRequestProperty("Content-Type", "application/json; charset=utf-8");
             if (data.length() > 0) {
                 OutputStream os = connection.getOutputStream();
                 BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
-                writer.write(UserHandler.getInstance().getmClub().toJson());
+                writer.write(UserHandler.getInstance().getmClub().formToJson());
                 writer.close();
                 os.close();
             }
@@ -101,6 +103,7 @@ public abstract class Connection extends AsyncTask<Void, Void, String> {
     public void endProcess(String result) {
         onResult(result);
     }
+
     @Override
     protected void onPostExecute(String result) {
         onResult(result);

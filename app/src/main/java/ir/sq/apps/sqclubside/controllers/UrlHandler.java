@@ -6,7 +6,7 @@ package ir.sq.apps.sqclubside.controllers;
 
 public enum UrlHandler {
     createUserURL("clubs/123"),
-    updateUserURL("");
+    updateUserURL("clubs/123");
     private String url;
     private String baseUrl = "http://192.168.43.82:8080/api/";
 
