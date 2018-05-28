@@ -12,8 +12,16 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import com.androidnetworking.AndroidNetworking;
+import com.androidnetworking.common.Priority;
+import com.androidnetworking.error.ANError;
+import com.androidnetworking.interfaces.JSONObjectRequestListener;
+import com.androidnetworking.interfaces.UploadProgressListener;
 import com.mvc.imagepicker.ImagePicker;
 
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +31,7 @@ import butterknife.OnClick;
 import ir.sq.apps.sqclubside.R;
 import ir.sq.apps.sqclubside.controllers.Connection;
 import ir.sq.apps.sqclubside.controllers.ImageHandler;
+import ir.sq.apps.sqclubside.controllers.ImageUploader;
 import ir.sq.apps.sqclubside.controllers.UrlHandler;
 import ir.sq.apps.sqclubside.controllers.UserHandler;
 import ir.sq.apps.sqclubside.models.Club;
@@ -94,27 +103,26 @@ public class ImageActivity extends AppCompatActivity implements ImagePreviewAdap
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.select_image_button:
-                ImagePicker.pickImage(this, "Select your image:");
+                ImagePicker.pickImage(this, "عکس را انتخاب کنید:");
                 break;
             case R.id.submit_images_button:
                 UserHandler.getInstance().setImages(images);
-                UserHandler.getInstance().getmClub().imagesToJson();
-//                if (images.size() > 0) {
-//                    sendImagesToServer();
-//                }
-//                startActivity(new Intent(ImageActivity.this, TagsActivity.class));
+                if (images.size() > 0) {
+                    sendImagesToServer();
+                }
+                startActivity(new Intent(ImageActivity.this, TagsActivity.class));
                 break;
 
         }
     }
 
     private void sendImagesToServer() {
-        Connection sendImages = new Connection(UrlHandler.updateUserURL.toString(), UserHandler.getInstance().getmClub().imagesToJson(), "PUT", ConnectionUi.noneUi(this)) {
-            @Override
-            protected void onResult(String result) {
-                Log.i("Result SITS", result);
+        for (int i = 0; i < images.size(); i++) {
+            try {
+                ImageUploader.uploadImageTo(ImageHandler.getImageFile(this, images.get(i)), UrlHandler.uploadeImageURL.toString());
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        };
-        sendImages.execute();
+        }
     }
 }

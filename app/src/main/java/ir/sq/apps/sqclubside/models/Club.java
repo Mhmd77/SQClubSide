@@ -74,20 +74,11 @@ public class Club {
         return object.toString();
     }
 
-    public String imagesToJson() {
-        JSONObject object = new JSONObject();
-        JSONArray imageArray = new JSONArray();
-        try {
-            for (Bitmap bitmap : images) {
-                imageArray.put(ImageHandler.getImageEncoded(bitmap));
-            }
-            object.put("images", imageArray);
-            object.put("ownerUserName", ownerUserName);
-            object.put("type", "1");
-            Log.i("Image Json", object.toString());
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return object.toString();
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+
+    public void setLongtitude(Double longtitude) {
+        this.longtitude = longtitude;
     }
 }

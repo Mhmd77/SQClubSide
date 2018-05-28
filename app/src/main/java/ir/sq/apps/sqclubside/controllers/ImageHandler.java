@@ -1,24 +1,25 @@
 package ir.sq.apps.sqclubside.controllers;
 
+import android.content.Context;
 import android.graphics.Bitmap;
-import android.util.Base64;
-import android.util.Log;
 
-import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 /**
  * Created by Mohammad on 5/28/2018.
  */
 
 public class ImageHandler {
-    public static String getImageEncoded(Bitmap bitmap) {
-        final int COMPRESSION_QUALITY = 100;
-        String encodedImage;
-        ByteArrayOutputStream byteArrayBitmapStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, COMPRESSION_QUALITY,
-                byteArrayBitmapStream);
-        byte[] b = byteArrayBitmapStream.toByteArray();
-        encodedImage = Base64.encodeToString(b, Base64.DEFAULT);
-        return encodedImage;
+
+    public static File getImageFile(Context context, Bitmap bitmap) throws IOException {
+        File outputDir = context.getCacheDir();
+        File outputFile = File.createTempFile("temp", ".png", outputDir);
+        FileOutputStream fOut = new FileOutputStream(outputFile);
+        bitmap.compress(Bitmap.CompressFormat.PNG, 95, fOut);
+        fOut.flush();
+        fOut.close();
+        return outputFile;
     }
 }

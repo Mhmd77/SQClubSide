@@ -146,8 +146,8 @@ public class FormActivity extends AppCompatActivity {
             case R.id.submit_information_button:
                 if (checkEmptyFields()) {
                     sendUserToServer();
+                    startActivity(new Intent(FormActivity.this, ImageActivity.class));
                 }
-                startActivity(new Intent(FormActivity.this, ImageActivity.class));
                 break;
         }
     }
@@ -157,23 +157,25 @@ public class FormActivity extends AppCompatActivity {
         if (requestCode == PLACE_PICKER_REQUEST) {
             if (resultCode == RESULT_OK) {
                 Place place = PlacePicker.getPlace(data, this);
-                StringBuilder stBuilder = new StringBuilder();
-                String placename = String.format("%s", place.getName());
-                String latitude = String.valueOf(place.getLatLng().latitude);
-                String longitude = String.valueOf(place.getLatLng().longitude);
-                String address = String.format("%s", place.getAddress());
-                stBuilder.append("Name: ");
-                stBuilder.append(placename);
-                stBuilder.append("\n");
-                stBuilder.append("Latitude: ");
-                stBuilder.append(latitude);
-                stBuilder.append("\n");
-                stBuilder.append("Logitude: ");
-                stBuilder.append(longitude);
-                stBuilder.append("\n");
-                stBuilder.append("Address: ");
-                stBuilder.append(address);
-                Log.i("LOCATION", stBuilder.toString());
+//                StringBuilder stBuilder = new StringBuilder();
+//                String placename = String.format("%s", place.getName());
+//                String latitude = String.valueOf(place.getLatLng().latitude);
+//                String longitude = String.valueOf(place.getLatLng().longitude);
+//                String address = String.format("%s", place.getAddress());
+//                stBuilder.append("Name: ");
+//                stBuilder.append(placename);
+//                stBuilder.append("\n");
+//                stBuilder.append("Latitude: ");
+//
+//                stBuilder.append("\n");
+//                stBuilder.append("Logitude: ");
+//                stBuilder.append(longitude);
+//                stBuilder.append("\n");
+//                stBuilder.append("Address: ");
+//                stBuilder.append(address);
+//                Log.i("LOCATION", stBuilder.toString());
+//                UserHandler.getInstance().getmClub().setLatitude(place.getLatLng().latitude);
+//                UserHandler.getInstance().getmClub().setLongtitude(place.getLatLng().longitude);
             }
         }
     }
@@ -181,16 +183,16 @@ public class FormActivity extends AppCompatActivity {
     private void sendUserToServer() {
         UserHandler.getInstance().createClub(allEditTexts[0].getText().toString(), clubOwnerEdittext.getText().toString(),
                 clubTelephonenumberEdittext.getText().toString(), clubCellphonenumberEdittext.getText().toString(), clubAddressEdittext.getText().toString());
-//        Connection connection = new Connection(UrlHandler.createUserURL.toString(), UserHandler.getInstance().getmClub().formToJson(), "POST", ConnectionUi.getDefault(this)) {
-//            @Override
-//            protected void onResult(String result) {
-//                if (result.length() == 0) {
-//                    Log.e("ERROR", "FAILED");
-//                }
-//                Log.i("RESULT", result);
-//            }
-//        };
-//        connection.execute();
+        Connection connection = new Connection(UrlHandler.createUserURL.toString(), UserHandler.getInstance().getmClub().formToJson(), "POST", ConnectionUi.getDefault(this)) {
+            @Override
+            protected void onResult(String result) {
+                if (result.length() == 0) {
+                    Log.e("ERROR", "FAILED");
+                }
+                Log.i("RESULT", result);
+            }
+        };
+        connection.execute();
     }
 
     private Boolean checkEmptyFields() {
