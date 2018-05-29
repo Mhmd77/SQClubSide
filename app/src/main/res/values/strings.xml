@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">SQClubSide</string>
     <string name="title_activity_club_location">نقشه باشگاه</string>
+    <string name="empty_field_error_meesage">این فیلد نمی تواند خالی باشد</string>
+    <string name="string_add_images">اضافه کردن عکس ها</string>
+    <string name="string_type_reserve_title">نوع رزرو :</string>
+    <string name="string_hour_reserve">ساعتی</string>
+    <string name="string_sans_reserve">سانسی</string>
+    <string name="string_no_image_preview">عکسی برای نمایش وجود ندارد</string>
+    <string name="string_add_tags">اضافه کردن تگ ها</string>
 </resources>

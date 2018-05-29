@@ -1,4 +1,4 @@
-package ir.sq.apps.sqclubside;
+package ir.sq.apps.sqclubside.uiControllers;
 
 import android.content.Context;
 import android.content.res.AssetManager;
