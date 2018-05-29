@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.error.ANError;
@@ -110,7 +111,7 @@ public class SignUpLogin extends AppCompatActivity implements View.OnClickListen
         signUPviews[2] = email_textview;
 
         signInViews = new TextInputEditText[2];
-        signInViews[0] = email_signin;
+        signInViews[0] = userName_signin;
         signInViews[1] = passWord_signin;
     }
 
@@ -125,6 +126,9 @@ public class SignUpLogin extends AppCompatActivity implements View.OnClickListen
         PercentRelativeLayout.LayoutParams paramsLogin = (PercentRelativeLayout.LayoutParams) llSignin.getLayoutParams();
         PercentLayoutHelper.PercentLayoutInfo infoLogin = paramsLogin.getPercentLayoutInfo();
         infoLogin.widthPercent = 0.15f;
+//        for (EditText e : signInViews) {
+//                e.setError(null);
+//        }
         llSignin.requestLayout();
 
 
@@ -148,6 +152,9 @@ public class SignUpLogin extends AppCompatActivity implements View.OnClickListen
         PercentLayoutHelper.PercentLayoutInfo infoLogin = paramsLogin.getPercentLayoutInfo();
         infoLogin.widthPercent = 0.85f;
         llSignin.requestLayout();
+//        for (EditText e : signUPviews) {
+//                e.setError(null);
+//        }
 
 
         PercentRelativeLayout.LayoutParams paramsSignup = (PercentRelativeLayout.LayoutParams) llSignup.getLayoutParams();
@@ -188,19 +195,17 @@ public class SignUpLogin extends AppCompatActivity implements View.OnClickListen
 
     @Override
     public void onClick(View view) {
+        Toast.makeText(SignUpLogin.this, "HERE", Toast.LENGTH_LONG).show();
         switch (view.getId()) {
             case R.id.signIn_button:
                 if (checkEmptyFieldsSignIn()) {
                     signIn();
                 }
-
-
                 break;
             case R.id.signUP_button:
                 if (checkEmptyFieldsSignUp()) {
                     signUp();
                 }
-
                 break;
         }
 

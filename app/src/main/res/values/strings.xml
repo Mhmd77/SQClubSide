@@ -10,4 +10,6 @@
     <string name="string_username">نام کاربری</string>
     <string name="string_password">رمز عبور</string>
     <string name="string_email">ایمیل</string>
+    <string name="button_signUp">ثبت نام</string>
+    <string name="button_signin">ورود</string>
 </resources>
