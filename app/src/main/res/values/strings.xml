@@ -7,4 +7,7 @@
     <string name="string_hour_reserve">ساعتی</string>
     <string name="string_sans_reserve">سانسی</string>
     <string name="title_activity_sign_up_login">SignUpLogin</string>
+    <string name="string_username">نام کاربری</string>
+    <string name="string_password">رمز عبور</string>
+    <string name="string_email">ایمیل</string>
 </resources>

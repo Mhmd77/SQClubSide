@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorAccentTrans"
+    android:background="@color/colorBlackTrans"
     android:gravity="center"
     android:orientation="vertical"
     android:padding="48dp">
@@ -17,50 +17,55 @@
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColorHint="#FFF">
+        android:textColorHint="@color/colorAccent">
 
         <android.support.design.widget.TextInputEditText
             android:layout_width="match_parent"
+            android:id="@+id/userName_textview"
             android:layout_height="wrap_content"
-            android:hint="نام کاربری"
-            android:textColor="#FFFFFF" />
+            android:hint="@string/string_username"
+            android:textColor="@color/colorAccent" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:textColorHint="#FFF">
+        android:textColorHint="@color/colorAccent">
 
         <android.support.design.widget.TextInputEditText
+            android:id="@+id/passWord_textview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="رمزعبور"
+            android:hint="@string/string_password"
             android:inputType="textPassword"
-            android:textColor="#FFFFFF" />
+            android:textColor="@color/colorAccent" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:textColorHint="#FFF">
+        android:textColorHint="@color/colorAccent">
 
         <android.support.design.widget.TextInputEditText
             android:layout_width="match_parent"
+            android:id="@+id/email_textview"
             android:layout_height="wrap_content"
-            android:hint="ایمیل "
+            android:hint="@string/string_email"
             android:inputType="textEmailAddress"
-            android:textColor="#FFFFFF" />
+            android:textColor="@color/colorAccent" />
     </android.support.design.widget.TextInputLayout>
 
     <Button
-        android:id="@+id/btnSignup"
+        android:id="@+id/signUP_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:background="@null"
         android:text="ثبت نام"
-        android:textColor="#FFF"
-        android:textSize="30sp" />
+        android:backgroundTint="@color/backgroundColor"
+        android:textColor="@color/colorAccent"
+        android:textSize="30sp"
+        android:onClick="onClick"/>
 </LinearLayout>

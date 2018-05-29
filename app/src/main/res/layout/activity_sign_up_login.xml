@@ -15,7 +15,6 @@
     <android.support.percent.PercentRelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:background="@color/colorBlackTrans"
         android:orientation="horizontal">
@@ -25,9 +24,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
-            android:background="@color/colorPrimaryTrans"
             android:orientation="horizontal"
-            app:layout_widthPercent="85%">
+            app:layout_widthPercent="85%"
+            android:layout_alignParentStart="true">
 
             <ir.sq.apps.sqclubside.uiControllers.VerticalTextView
                 android:id="@+id/tvSigninInvoker"
@@ -54,10 +53,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"
-            android:background="@color/colorAccentTrans"
+            android:background="@color/colorBlackTrans"
             android:gravity="center_horizontal"
             android:orientation="horizontal"
-            app:layout_widthPercent="15%">
+            app:layout_widthPercent="15%"
+            android:layout_alignParentEnd="true">
 
             <ir.sq.apps.sqclubside.uiControllers.VerticalTextView
                 android:id="@+id/tvSignupInvoker"
