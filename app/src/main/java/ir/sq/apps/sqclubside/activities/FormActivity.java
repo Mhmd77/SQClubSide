@@ -157,8 +157,7 @@ public class FormActivity extends AppCompatActivity {
             case R.id.submit_information_button:
                 if (checkEmptyFields()) {
                     createUser();
-//                    sendUserToServer();
-                    RequestsHandler.sendClubTo(UserHandler.getInstance().getmClub(), UrlHandler.createUserURL.toString());
+                    RequestsHandler.sendClubTo(UserHandler.getInstance().getmClub(), UrlHandler.createUserURL.getUrl());
                 }
                 startActivity(new Intent(FormActivity.this, ImageActivity.class));
                 break;
@@ -180,18 +179,6 @@ public class FormActivity extends AppCompatActivity {
         }
     }
 
-//    private void sendUserToServer() {
-//        Connection connection = new Connection(UrlHandler.createUserURL.toString(), UserHandler.getInstance().getmClub().toJson(), "POST", ConnectionUi.getDefault(this)) {
-//            @Override
-//            protected void onResult(String result) {
-//                if (result.length() == 0) {
-//                    Log.e("ERROR", "FAILED");
-//                }
-//                Log.i("RESULT", result);
-//            }
-//        };
-//        connection.execute();
-//    }
 
     private void createUser() {
         UserHandler.getInstance().createClub(allEditTexts[0].getText().toString(), clubOwnerEdittext.getText().toString(),

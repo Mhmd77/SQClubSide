@@ -28,6 +28,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import ir.sq.apps.sqclubside.R;
 import ir.sq.apps.sqclubside.controllers.UrlHandler;
+import ir.sq.apps.sqclubside.controllers.UserHandler;
 import ir.sq.apps.sqclubside.uiControllers.TypeFaceHandler;
 
 public class SignUpLogin extends AppCompatActivity implements View.OnClickListener {
@@ -214,13 +215,13 @@ public class SignUpLogin extends AppCompatActivity implements View.OnClickListen
     private void signIn() {
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("userName", userName_signin.getText().toString());
-            jsonObject.put("passWord", passWord_signin.getText().toString());
+            jsonObject.put("userName", userName_signin.getText().toString().trim());
+            jsonObject.put("passWord", passWord_signin.getText().toString().trim());
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        AndroidNetworking.post(UrlHandler.signInUserURL.toString())
+        AndroidNetworking.post(UrlHandler.signInUserURL.getUrl())
                 .addJSONObjectBody(jsonObject)
                 .build()
                 .getAsJSONObject(new JSONObjectRequestListener() {
@@ -229,8 +230,10 @@ public class SignUpLogin extends AppCompatActivity implements View.OnClickListen
                         try {
                             int status = response.getInt("status");
                             if (status == 1) {
-                                Log.i("SIGNIN", "Done");
                                 startActivity(new Intent(SignUpLogin.this, FormActivity.class));
+                                UserHandler.getInstance().setUserName(userName_signin.getText().toString().trim());
+                                UserHandler.getInstance().setPassWord(passWord_signin.getText().toString().trim());
+                                Log.i("SIGNIN", "Done");
                             } else {
                                 String errorMessage = getString(R.string.string_wrong_username_or_password);
                                 Snackbar.make(signInbutton, errorMessage, Snackbar.LENGTH_SHORT).show();
@@ -263,14 +266,14 @@ public class SignUpLogin extends AppCompatActivity implements View.OnClickListen
     private void signUp() {
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("userName", userName_signup.getText().toString());
-            jsonObject.put("passWord", passWord_signup.getText().toString());
+            jsonObject.put("userName", userName_signup.getText().toString().trim());
+            jsonObject.put("passWord", passWord_signup.getText().toString().trim());
             jsonObject.put("email", email_signup.getText().toString());
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        AndroidNetworking.post(UrlHandler.signUpUserURL.toString())
+        AndroidNetworking.post(UrlHandler.signUpUserURL.getUrl())
 
                 .addJSONObjectBody(jsonObject)
                 .build()
@@ -282,6 +285,8 @@ public class SignUpLogin extends AppCompatActivity implements View.OnClickListen
                             if (status == 1) {
                                 Log.i("SIGNUP", "Done");
                                 Toast.makeText(SignUpLogin.this, R.string.string_signup_message_done, Toast.LENGTH_SHORT).show();
+                                UserHandler.getInstance().setUserName(userName_signup.getText().toString().trim());
+                                UserHandler.getInstance().setPassWord(passWord_signup.getText().toString().trim());
                                 startActivity(new Intent(SignUpLogin.this, FormActivity.class));
                             } else
                                 Log.e("SIGNUP", "Error In Response");

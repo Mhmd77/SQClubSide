@@ -38,7 +38,7 @@ public class RequestsHandler {
                                 onResponse.onTagsRecieved(response.getJSONArray("object"));
                                 Log.i("TAGS", String.valueOf(response.getJSONArray("object")));
                             } else {
-                                Log.e(TAG + " : TAG", "Error In Response");
+                                Log.e(TAG + " : TAG", "Error In Response " + status);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -108,7 +108,8 @@ public class RequestsHandler {
                             if (status == Constants.SUCCESSFUL_CONNECTION) {
                                 Log.i(TAG, "response : " + response.toString());
                             } else {
-                                Log.e(TAG, "Error In Response");
+                                String pas = response.get("object").toString();
+                                Log.e(TAG, "Error In Response " + status + pas);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

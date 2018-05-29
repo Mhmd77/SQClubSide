@@ -16,6 +16,9 @@ public class UserHandler {
 
     private Club mClub;
 
+    private String userName;
+    private String passWord;
+
     public static UserHandler getInstance() {
         return ourInstance;
     }
@@ -24,7 +27,7 @@ public class UserHandler {
     }
 
     public void createClub(String name, String owner, String tele, String cell, String address) {
-        mClub = new Club(name, owner, tele, cell, address);
+        mClub = new Club(userName, name, owner, tele, cell, address);
     }
 
     public void setImages(List<Bitmap> images) {
@@ -42,5 +45,21 @@ public class UserHandler {
 
     public Club getmClub() {
         return mClub;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public void setPassWord(String passWord) {
+        this.passWord = passWord;
+    }
+
+    public String getPassWord() {
+        return passWord;
     }
 }
