@@ -5,6 +5,8 @@ package ir.sq.apps.sqclubside.controllers;
  */
 
 public enum UrlHandler {
+    signUpUserURL("users"),
+    signInUserURL("users/login"),
     createUserURL("clubs/123"),
     getTagsURL("clubs/tags"),
     uploadeImageURL("images/aliali/123"),

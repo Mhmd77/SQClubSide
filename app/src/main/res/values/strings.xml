@@ -6,6 +6,14 @@
     <string name="string_type_reserve_title">نوع رزرو :</string>
     <string name="string_hour_reserve">ساعتی</string>
     <string name="string_sans_reserve">سانسی</string>
+    <string name="title_activity_sign_up_login">SignUpLogin</string>
+    <string name="string_username">نام کاربری</string>
+    <string name="string_password">رمز عبور</string>
+    <string name="string_email">ایمیل</string>
+    <string name="button_signUp">ثبت نام</string>
+    <string name="button_signin">ورود</string>
+    <string name="string_wrong_username_or_password">نام کاربری یا رمز عبور اشتباه است</string>
+    <string name="string_signup_message_done">ثبت نام با موفقیت انجام شد</string>
     <string name="string_no_image_preview">عکسی برای نمایش وجود ندارد</string>
     <string name="string_add_tags">اضافه کردن تگ ها</string>
 </resources>
