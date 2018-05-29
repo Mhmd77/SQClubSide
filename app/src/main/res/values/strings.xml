@@ -12,4 +12,6 @@
     <string name="string_email">ایمیل</string>
     <string name="button_signUp">ثبت نام</string>
     <string name="button_signin">ورود</string>
+    <string name="string_wrong_username_or_password">نام کاربری یا رمز عبور اشتباه است</string>
+    <string name="string_signup_message_done">ثبت نام با موفقیت انجام شد</string>
 </resources>

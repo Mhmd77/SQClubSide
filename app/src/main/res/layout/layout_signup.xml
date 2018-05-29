@@ -20,8 +20,8 @@
         android:textColorHint="@color/colorAccent">
 
         <android.support.design.widget.TextInputEditText
+            android:id="@+id/userName_signup"
             android:layout_width="match_parent"
-            android:id="@+id/userName_textview"
             android:layout_height="wrap_content"
             android:hint="@string/string_username"
             android:textColor="@color/colorAccent" />
@@ -34,7 +34,7 @@
         android:textColorHint="@color/colorAccent">
 
         <android.support.design.widget.TextInputEditText
-            android:id="@+id/passWord_textview"
+            android:id="@+id/passWord_signup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/string_password"
@@ -49,8 +49,8 @@
         android:textColorHint="@color/colorAccent">
 
         <android.support.design.widget.TextInputEditText
+            android:id="@+id/email_signup"
             android:layout_width="match_parent"
-            android:id="@+id/email_textview"
             android:layout_height="wrap_content"
             android:hint="@string/string_email"
             android:inputType="textEmailAddress"
@@ -63,8 +63,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:background="@null"
+        android:onClick="onClick"
         android:text="@string/button_signUp"
         android:textColor="@color/colorAccent"
-        android:onClick="onClick"
         android:textSize="30sp" />
 </LinearLayout>

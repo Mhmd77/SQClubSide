@@ -1,6 +1,8 @@
 package ir.sq.apps.sqclubside.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
 import android.support.percent.PercentLayoutHelper;
 import android.support.percent.PercentRelativeLayout;
@@ -17,10 +19,8 @@ import android.widget.Toast;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.error.ANError;
-import com.androidnetworking.interfaces.JSONArrayRequestListener;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -41,18 +41,18 @@ public class SignUpLogin extends AppCompatActivity implements View.OnClickListen
     private TextInputEditText[] signUPviews;
     private TextInputEditText[] signInViews;
 
-    @BindView(R.id.userName_textview)
-    TextInputEditText userName_textview;
-    @BindView(R.id.passWord_textview)
-    TextInputEditText passWord_textview;
-    @BindView(R.id.email_textview)
-    TextInputEditText email_textview;
+    @BindView(R.id.userName_signup)
+    TextInputEditText userName_signup;
+    @BindView(R.id.passWord_signup)
+    TextInputEditText passWord_signup;
+    @BindView(R.id.email_signup)
+    TextInputEditText email_signup;
     @BindView(R.id.userName_signin)
     TextInputEditText userName_signin;
     @BindView(R.id.passWord_signin)
     TextInputEditText passWord_signin;
 
-    LinearLayout llsignin, llsignup;
+    LinearLayout llsignup;
 
 
     @Override
@@ -62,24 +62,25 @@ public class SignUpLogin extends AppCompatActivity implements View.OnClickListen
 
         ButterKnife.bind(this);
 
-        llSignin = (LinearLayout) findViewById(R.id.llSignin);
+        llSignin = findViewById(R.id.llSignin);
         llSignin.setOnClickListener(this);
-        llsignup = (LinearLayout) findViewById(R.id.llSignup);
+        llsignup = findViewById(R.id.llSignup);
         llsignup.setOnClickListener(this);
-        tvSignupInvoker = (TextView) findViewById(R.id.tvSignupInvoker);
-        tvSigninInvoker = (TextView) findViewById(R.id.tvSigninInvoker);
+        tvSignupInvoker = findViewById(R.id.tvSignupInvoker);
+        tvSigninInvoker = findViewById(R.id.tvSigninInvoker);
 
-        signUpbutton = (Button) findViewById(R.id.signUP_button);
-        signInbutton = (Button) findViewById(R.id.signIn_button);
+        signUpbutton = findViewById(R.id.signUP_button);
+        signInbutton = findViewById(R.id.signIn_button);
 
-        llSignup = (LinearLayout) findViewById(R.id.llSignup);
-        llSignin = (LinearLayout) findViewById(R.id.llSignin);
+        llSignup = findViewById(R.id.llSignup);
+        llSignin = findViewById(R.id.llSignin);
 
         tvSignupInvoker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 isSigninScreen = false;
                 showSignupForm();
+                emptyErrors();
             }
         });
 
@@ -88,27 +89,27 @@ public class SignUpLogin extends AppCompatActivity implements View.OnClickListen
             public void onClick(View view) {
                 isSigninScreen = true;
                 showSigninForm();
+                emptyErrors();
             }
         });
         showSigninForm();
-
-        signUpbutton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Animation clockwise = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate_right_to_left);
-                if (isSigninScreen)
-                    signUpbutton.startAnimation(clockwise);
-            }
-        });
         setFonts();
         setviews();
     }
 
+    private void emptyErrors() {
+        userName_signup.setError(null);
+        email_signup.setError(null);
+        passWord_signup.setError(null);
+        userName_signin.setError(null);
+        passWord_signin.setError(null);
+    }
+
     private void setviews() {
         signUPviews = new TextInputEditText[3];
-        signUPviews[0] = userName_textview;
-        signUPviews[1] = passWord_textview;
-        signUPviews[2] = email_textview;
+        signUPviews[0] = userName_signup;
+        signUPviews[1] = passWord_signup;
+        signUPviews[2] = email_signup;
 
         signInViews = new TextInputEditText[2];
         signInViews[0] = userName_signin;
@@ -120,15 +121,17 @@ public class SignUpLogin extends AppCompatActivity implements View.OnClickListen
         tvSignupInvoker.setTypeface(TypeFaceHandler.getInstance(this).getFa_bold());
         signInbutton.setTypeface(TypeFaceHandler.getInstance(this).getFa_bold());
         signUpbutton.setTypeface(TypeFaceHandler.getInstance(this).getFa_bold());
+        passWord_signin.setTypeface(TypeFaceHandler.getInstance(this).getFa_light());
+        passWord_signup.setTypeface(TypeFaceHandler.getInstance(this).getFa_light());
+        userName_signin.setTypeface(TypeFaceHandler.getInstance(this).getFa_light());
+        userName_signup.setTypeface(TypeFaceHandler.getInstance(this).getFa_light());
+        email_signup.setTypeface(TypeFaceHandler.getInstance(this).getFa_light());
     }
 
     private void showSignupForm() {
         PercentRelativeLayout.LayoutParams paramsLogin = (PercentRelativeLayout.LayoutParams) llSignin.getLayoutParams();
         PercentLayoutHelper.PercentLayoutInfo infoLogin = paramsLogin.getPercentLayoutInfo();
         infoLogin.widthPercent = 0.15f;
-//        for (EditText e : signInViews) {
-//                e.setError(null);
-//        }
         llSignin.requestLayout();
 
 
@@ -152,11 +155,6 @@ public class SignUpLogin extends AppCompatActivity implements View.OnClickListen
         PercentLayoutHelper.PercentLayoutInfo infoLogin = paramsLogin.getPercentLayoutInfo();
         infoLogin.widthPercent = 0.85f;
         llSignin.requestLayout();
-//        for (EditText e : signUPviews) {
-//                e.setError(null);
-//        }
-
-
         PercentRelativeLayout.LayoutParams paramsSignup = (PercentRelativeLayout.LayoutParams) llSignup.getLayoutParams();
         PercentLayoutHelper.PercentLayoutInfo infoSignup = paramsSignup.getPercentLayoutInfo();
         infoSignup.widthPercent = 0.15f;
@@ -195,7 +193,6 @@ public class SignUpLogin extends AppCompatActivity implements View.OnClickListen
 
     @Override
     public void onClick(View view) {
-        Toast.makeText(SignUpLogin.this, "HERE", Toast.LENGTH_LONG).show();
         switch (view.getId()) {
             case R.id.signIn_button:
                 if (checkEmptyFieldsSignIn()) {
@@ -203,6 +200,9 @@ public class SignUpLogin extends AppCompatActivity implements View.OnClickListen
                 }
                 break;
             case R.id.signUP_button:
+                Animation clockwise = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate_right_to_left);
+                if (isSigninScreen)
+                    signUpbutton.startAnimation(clockwise);
                 if (checkEmptyFieldsSignUp()) {
                     signUp();
                 }
@@ -214,46 +214,58 @@ public class SignUpLogin extends AppCompatActivity implements View.OnClickListen
     private void signIn() {
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("userName", userName_signin.toString());
-            jsonObject.put("passWord", passWord_signin.toString());
+            jsonObject.put("userName", userName_signin.getText().toString());
+            jsonObject.put("passWord", passWord_signin.getText().toString());
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
         AndroidNetworking.post(UrlHandler.signInUserURL.toString())
                 .addJSONObjectBody(jsonObject)
-
                 .build()
                 .getAsJSONObject(new JSONObjectRequestListener() {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
                             int status = response.getInt("status");
-                            if(status == 1)
-                            Log.e("SIGNIN", "Done");
-                         else
-                        Log.e("SIGNIN", "FUCKED");
-                }
-                         catch(JSONException e){
+                            if (status == 1) {
+                                Log.i("SIGNIN", "Done");
+                                startActivity(new Intent(SignUpLogin.this, FormActivity.class));
+                            } else {
+                                String errorMessage = getString(R.string.string_wrong_username_or_password);
+                                Snackbar.make(signInbutton, errorMessage, Snackbar.LENGTH_SHORT).show();
+                                emptyFields();
+                                Log.e("SIGNIN", "Not Correct");
+                            }
+                        } catch (JSONException e) {
                             e.printStackTrace();
                         }
                     }
 
 
                     @Override
-                    public void onError(ANError anError) {
+                    public void onError(ANError error) {
+                        Log.e("SIGN IN", "ERROR: " + error.getErrorBody() + " code : " + error.getErrorCode());
 
                     }
                 });
 
     }
 
+    private void emptyFields() {
+        userName_signup.setText("");
+        passWord_signup.setText("");
+        email_signup.setText("");
+        userName_signin.setText("");
+        passWord_signin.setText("");
+    }
+
     private void signUp() {
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("userName", userName_textview.toString());
-            jsonObject.put("passWord", passWord_textview.toString());
-            jsonObject.put("email", email_textview.toString());
+            jsonObject.put("userName", userName_signup.getText().toString());
+            jsonObject.put("passWord", passWord_signup.getText().toString());
+            jsonObject.put("email", email_signup.getText().toString());
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -268,21 +280,21 @@ public class SignUpLogin extends AppCompatActivity implements View.OnClickListen
                         try {
                             int status = response.getInt("status");
                             if (status == 1) {
-                                Log.e("SIGNUP", "Done");
+                                Log.i("SIGNUP", "Done");
+                                Toast.makeText(SignUpLogin.this, R.string.string_signup_message_done, Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(SignUpLogin.this, FormActivity.class));
                             } else
-                                Log.e("SIGNUP", "FUCKED");
+                                Log.e("SIGNUP", "Error In Response");
                         } catch (JSONException e) {
-
                             e.printStackTrace();
                         }
                     }
 
                     @Override
                     public void onError(ANError error) {
-                        // handle error
+                        Log.e("SIGNUP", "ERROR: " + error.getErrorBody() + " code : " + error.getErrorCode());
                     }
                 });
-
     }
 
 
