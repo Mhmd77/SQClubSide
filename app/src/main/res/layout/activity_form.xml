@@ -1,128 +1,181 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
     android:orientation="vertical"
-    android:padding="10dp"
     tools:context="ir.sq.apps.sqclubside.activities.FormActivity">
 
-    <TextView
-        android:id="@+id/club_name_textview"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="نام باشگاه"
-        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-        android:textStyle="bold" />
+        android:layout_height="match_parent"
+        android:layout_margin="8dp"
+        android:orientation="vertical">
 
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-
-        <EditText
-            android:id="@+id/club_name_edittext"
+        <TextView
+            android:id="@+id/club_name_textview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text" />
+            android:text="نام باشگاه"
+            android:textStyle="bold"
+            android:visibility="gone" />
 
-
-    </android.support.design.widget.TextInputLayout>
-
-    <TextView
-        android:id="@+id/club_owner_textview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="نام مدیر"
-        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-        android:textStyle="bold" />
-
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <EditText
-            android:id="@+id/club_owner_edittext"
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/club_name_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text" />
-    </android.support.design.widget.TextInputLayout>
+            android:layout_margin="3dp"
+            android:padding="5dp"
+            android:background="@drawable/background_input_fields"
+            android:hint="نام باشگاه"
+            android:textColorHint="#b0b1c4">
 
-    <TextView
-        android:id="@+id/club_telephonenumber_textview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="تلفن ثابت"
-        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-        android:textStyle="bold" />
 
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+            <EditText
+                android:id="@+id/club_name_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:inputType="text"
+                android:textColor="#b0b1c4" />
 
-        <EditText
-            android:id="@+id/club_telephonenumber_edittext"
+
+        </android.support.design.widget.TextInputLayout>
+
+        <TextView
+            android:id="@+id/club_owner_textview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="phone" />
-    </android.support.design.widget.TextInputLayout>
+            android:text="نام مدیر"
+            android:textStyle="bold"
+            android:visibility="gone" />
 
-    <TextView
-        android:id="@+id/club_cellphonenumber_textview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="تلفن همراه"
-        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-        android:textStyle="bold" />
-
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <EditText
-            android:id="@+id/club_cellphonenumber_edittext"
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/club_owner_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="phone" />
+            android:padding="5dp"
+            android:layout_margin="3dp"
+            android:background="@drawable/background_input_fields"
+            android:hint="نام مدیر"
+            android:textColorHint="#b0b1c4">
 
-    </android.support.design.widget.TextInputLayout>
+            <EditText
+                android:id="@+id/club_owner_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:inputType="text"
+                android:textColor="#b0b1c4" />
+        </android.support.design.widget.TextInputLayout>
 
-    <TextView
-        android:id="@+id/club_address_textview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="آدرس باشگاه"
-        android:textStyle="bold" />
-
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <EditText
-            android:id="@+id/club_address_edittext"
+        <TextView
+            android:id="@+id/club_telephonenumber_textview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text" />
-    </android.support.design.widget.TextInputLayout>
+            android:text="تلفن ثابت"
+            android:textStyle="bold"
+            android:visibility="gone" />
 
-    <Button
-        android:id="@+id/club_location_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="مکان یابی" />
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/club_telephonenumber_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:layout_margin="3dp"
+            android:background="@drawable/background_input_fields"
+            android:hint="تلفن ثابت"
+            android:textColorHint="#b0b1c4">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
+            <EditText
+                android:id="@+id/club_telephonenumber_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:ems="10"
+                android:inputType="phone"
+                android:textColor="#b0b1c4" />
+        </android.support.design.widget.TextInputLayout>
 
-    <Button
-        android:id="@+id/submit_information_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="ثبت اطلاعات" />
+        <TextView
+            android:id="@+id/club_cellphonenumber_textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="تلفن همراه"
+            android:textStyle="bold"
+            android:visibility="gone" />
 
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/club_cellphonenumber_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:layout_margin="3dp"
+            android:background="@drawable/background_input_fields"
+            android:hint="تلفن همراه"
+            android:textColorHint="#b0b1c4">
 
-</LinearLayout>
+            <EditText
+                android:id="@+id/club_cellphonenumber_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:ems="10"
+                android:inputType="phone"
+                android:textColor="#b0b1c4" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <TextView
+            android:id="@+id/club_address_textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="آدرس باشگاه"
+            android:textStyle="bold"
+            android:visibility="gone" />
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/club_address_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:layout_margin="3dp"
+            android:background="@drawable/background_input_fields"
+            android:hint="آدرس باشگاه"
+            android:textColorHint="#b0b1c4">
+
+            <EditText
+                android:id="@+id/club_address_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:inputType="text"
+                android:textColor="#b0b1c4" />
+        </android.support.design.widget.TextInputLayout>
+
+        <Button
+            android:id="@+id/club_location_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/background_color_button"
+            android:text="مکان یابی"
+            android:textColor="#FFF" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/submit_information_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_color_button"
+            android:text="ثبت اطلاعات"
+            android:layout_marginBottom="5dp"
+            android:textColor="#FFF" />
+
+    </LinearLayout>
+</ScrollView>
