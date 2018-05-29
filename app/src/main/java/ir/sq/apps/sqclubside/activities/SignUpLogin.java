@@ -1,9 +1,11 @@
 package ir.sq.apps.sqclubside.activities;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
+import android.support.design.widget.TextInputLayout;
 import android.support.percent.PercentLayoutHelper;
 import android.support.percent.PercentRelativeLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -51,6 +53,18 @@ public class SignUpLogin extends AppCompatActivity implements View.OnClickListen
     TextInputEditText userName_signin;
     @BindView(R.id.passWord_signin)
     TextInputEditText passWord_signin;
+    @BindView(R.id.userName_signin_layout)
+    TextInputLayout userName_signin_layout;
+    @BindView(R.id.passWord_signin_layout)
+    TextInputLayout passWord_signin_layout;
+    @BindView(R.id.userName_signup_layout)
+    TextInputLayout userName_signup_layout;
+    @BindView(R.id.passWord_signup_layout)
+    TextInputLayout passWord_signup_layout;
+    @BindView(R.id.email_signup_layout)
+    TextInputLayout email_signup_layout;
+
+
 
     LinearLayout llsignup;
 
@@ -121,11 +135,17 @@ public class SignUpLogin extends AppCompatActivity implements View.OnClickListen
         tvSignupInvoker.setTypeface(TypeFaceHandler.getInstance(this).getFa_bold());
         signInbutton.setTypeface(TypeFaceHandler.getInstance(this).getFa_bold());
         signUpbutton.setTypeface(TypeFaceHandler.getInstance(this).getFa_bold());
-        passWord_signin.setTypeface(TypeFaceHandler.getInstance(this).getFa_light());
-        passWord_signup.setTypeface(TypeFaceHandler.getInstance(this).getFa_light());
-        userName_signin.setTypeface(TypeFaceHandler.getInstance(this).getFa_light());
-        userName_signup.setTypeface(TypeFaceHandler.getInstance(this).getFa_light());
-        email_signup.setTypeface(TypeFaceHandler.getInstance(this).getFa_light());
+        passWord_signin.setTypeface(TypeFaceHandler.getInstance(this).getFa_bold());
+        passWord_signup.setTypeface(TypeFaceHandler.getInstance(this).getFa_bold());
+        userName_signin.setTypeface(TypeFaceHandler.getInstance(this).getFa_bold());
+        userName_signup.setTypeface(TypeFaceHandler.getInstance(this).getFa_bold());
+        email_signup.setTypeface(TypeFaceHandler.getInstance(this).getFa_bold());
+        userName_signin_layout.setTypeface(TypeFaceHandler.getInstance(this).getFa_bold());
+        passWord_signin_layout.setTypeface(TypeFaceHandler.getInstance(this).getFa_bold());
+        userName_signup_layout.setTypeface(TypeFaceHandler.getInstance(this).getFa_bold());
+        passWord_signup_layout.setTypeface(TypeFaceHandler.getInstance(this).getFa_bold());
+        email_signup_layout.setTypeface(TypeFaceHandler.getInstance(this).getFa_bold());
+
     }
 
     private void showSignupForm() {
