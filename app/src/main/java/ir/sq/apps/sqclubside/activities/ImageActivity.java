@@ -22,8 +22,9 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ir.sq.apps.sqclubside.R;
 import ir.sq.apps.sqclubside.controllers.ImageHandler;
-import ir.sq.apps.sqclubside.controllers.ImageUploader;
+import ir.sq.apps.sqclubside.controllers.RequestsHandler;
 import ir.sq.apps.sqclubside.controllers.UrlHandler;
+import ir.sq.apps.sqclubside.controllers.UserHandler;
 import ir.sq.apps.sqclubside.uiControllers.ImagePreviewAdapter;
 import ir.sq.apps.sqclubside.uiControllers.TypeFaceHandler;
 
@@ -95,10 +96,10 @@ public class ImageActivity extends AppCompatActivity implements ImagePreviewAdap
                 ImagePicker.pickImage(this, "عکس را انتخاب کنید:");
                 break;
             case R.id.submit_images_button:
-//                UserHandler.getInstance().setImages(images);
-//                if (images.size() > 0) {
-//                    sendImagesToServer();
-//                }
+                UserHandler.getInstance().setImages(images);
+                if (images.size() > 0) {
+                    sendImagesToServer();
+                }
                 startActivity(new Intent(ImageActivity.this, TagsActivity.class));
                 break;
 
@@ -108,7 +109,7 @@ public class ImageActivity extends AppCompatActivity implements ImagePreviewAdap
     private void sendImagesToServer() {
         for (int i = 0; i < images.size(); i++) {
             try {
-                ImageUploader.uploadImageTo(ImageHandler.getImageFile(this, images.get(i)), UrlHandler.uploadeImageURL.toString());
+                RequestsHandler.uploadImageTo(ImageHandler.getImageFile(this, images.get(i)), UrlHandler.uploadeImageURL.toString());
             } catch (IOException e) {
                 e.printStackTrace();
             }

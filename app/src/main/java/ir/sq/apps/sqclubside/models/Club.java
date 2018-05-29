@@ -1,18 +1,15 @@
 package ir.sq.apps.sqclubside.models;
 
 import android.graphics.Bitmap;
-import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import ir.sq.apps.sqclubside.controllers.ImageHandler;
+import ir.sq.apps.sqclubside.utils.Constants;
 
 /**
  * Created by Mohammad on 5/27/2018.
@@ -20,11 +17,11 @@ import ir.sq.apps.sqclubside.controllers.ImageHandler;
 
 public class Club {
     //TODO Complete This Class
-    private int type;
+    private int type = Constants.TYPE_NONE;
 
     private Double latitude = -43.0;
     private Double longtitude = -50.8;
-    private Double rate;
+//    private Double rate;
 
     private String name;
     private String ownerUserName = "aliali";
@@ -32,9 +29,9 @@ public class Club {
     private String telePhoneNumber;
     private String cellPhoneNumber;
     private String address;
-    private String openTime;
-    private String price;
-    private String closeTime;
+//    private String openTime;
+//    private String price;
+//    private String closeTime;
 
     private List<Bitmap> images;
     private List<String> tags;
@@ -57,7 +54,7 @@ public class Club {
         this.tags.addAll(tags);
     }
 
-    public String formToJson() {
+    public JSONObject toJson() {
         JSONObject object = new JSONObject();
         try {
             object.put("name", name);
@@ -68,10 +65,20 @@ public class Club {
             object.put("latitude", latitude);
             object.put("longtitude", longtitude);
             object.put("ownerUserName", ownerUserName);
+            JSONArray jsonArray = new JSONArray();
+            for (String tag : tags) {
+                jsonArray.put(tag);
+            }
+            if (tags.size() > 0) {
+                object.put("tags", jsonArray);
+            }
+            if (type != Constants.TYPE_NONE) {
+                object.put("type", type);
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return object.toString();
+        return object;
     }
 
     public void setLatitude(Double latitude) {

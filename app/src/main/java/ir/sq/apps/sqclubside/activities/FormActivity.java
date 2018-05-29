@@ -6,12 +6,10 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
@@ -25,10 +23,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ir.sq.apps.sqclubside.controllers.PermissionHandler;
-import ir.sq.apps.sqclubside.uiControllers.ConnectionUi;
+import ir.sq.apps.sqclubside.controllers.RequestsHandler;
 import ir.sq.apps.sqclubside.R;
 import ir.sq.apps.sqclubside.uiControllers.TypeFaceHandler;
-import ir.sq.apps.sqclubside.controllers.Connection;
 import ir.sq.apps.sqclubside.controllers.UrlHandler;
 import ir.sq.apps.sqclubside.controllers.UserHandler;
 
@@ -158,10 +155,11 @@ public class FormActivity extends AppCompatActivity {
                 }
                 break;
             case R.id.submit_information_button:
-//                if (checkEmptyFields()) {
-//                    createUser();
+                if (checkEmptyFields()) {
+                    createUser();
 //                    sendUserToServer();
-//                }
+                    RequestsHandler.sendClubTo(UserHandler.getInstance().getmClub(), UrlHandler.createUserURL.toString());
+                }
                 startActivity(new Intent(FormActivity.this, ImageActivity.class));
                 break;
         }
@@ -182,18 +180,18 @@ public class FormActivity extends AppCompatActivity {
         }
     }
 
-    private void sendUserToServer() {
-        Connection connection = new Connection(UrlHandler.createUserURL.toString(), UserHandler.getInstance().getmClub().formToJson(), "POST", ConnectionUi.getDefault(this)) {
-            @Override
-            protected void onResult(String result) {
-                if (result.length() == 0) {
-                    Log.e("ERROR", "FAILED");
-                }
-                Log.i("RESULT", result);
-            }
-        };
-        connection.execute();
-    }
+//    private void sendUserToServer() {
+//        Connection connection = new Connection(UrlHandler.createUserURL.toString(), UserHandler.getInstance().getmClub().toJson(), "POST", ConnectionUi.getDefault(this)) {
+//            @Override
+//            protected void onResult(String result) {
+//                if (result.length() == 0) {
+//                    Log.e("ERROR", "FAILED");
+//                }
+//                Log.i("RESULT", result);
+//            }
+//        };
+//        connection.execute();
+//    }
 
     private void createUser() {
         UserHandler.getInstance().createClub(allEditTexts[0].getText().toString(), clubOwnerEdittext.getText().toString(),
