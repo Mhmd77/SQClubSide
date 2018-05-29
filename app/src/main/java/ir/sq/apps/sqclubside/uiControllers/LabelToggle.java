@@ -13,16 +13,14 @@ import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 
-import com.nex3z.togglebuttongroup.R;
 import com.nex3z.togglebuttongroup.button.MarkerButton;
 import com.nex3z.togglebuttongroup.button.ToggleButton;
 
 public class LabelToggle extends MarkerButton implements ToggleButton {
-    private static final String LOG_TAG = com.nex3z.togglebuttongroup.button.LabelToggle.class.getSimpleName();
+//    private static final String LOG_TAG = com.nex3z.togglebuttongroup.button.LabelToggle.class.getSimpleName();
 
     private static final int DEFAULT_ANIMATION_DURATION = 150;
 
@@ -86,7 +84,7 @@ public class LabelToggle extends MarkerButton implements ToggleButton {
     private void initAnimation() {
         final int defaultTextColor = getDefaultTextColor();
         final int checkedTextColor = getCheckedTextColor();
-        Log.v(LOG_TAG, "initAnimation(): defaultTextColor = " + defaultTextColor + ", checkedTextColor = " + checkedTextColor);
+//        Log.v(LOG_TAG, "initAnimation(): defaultTextColor = " + defaultTextColor + ", checkedTextColor = " + checkedTextColor);
 
         mTextColorAnimator = ValueAnimator.ofObject(
                 new ArgbEvaluator(), defaultTextColor, checkedTextColor);

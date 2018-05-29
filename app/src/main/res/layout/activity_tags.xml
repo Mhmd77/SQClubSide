@@ -53,7 +53,7 @@
         android:id="@+id/tags_group_type_sans"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_margin="8dp"
         android:visibility="gone"
         app:tbgChildSpacing="auto"
         app:tbgChildSpacingForLastRow="align"
@@ -68,4 +68,18 @@
         app:tbgChildSpacing="auto"
         app:tbgChildSpacingForLastRow="align"
         app:tbgRowSpacing="8dp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <Button
+        android:id="@+id/submit_tags_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:background="@drawable/background_color_button"
+        android:text="@string/string_add_tags"
+        android:textColor="#FFF" />
 </LinearLayout>

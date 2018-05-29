@@ -6,20 +6,12 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
+import android.widget.TextView;
 
-import com.androidnetworking.AndroidNetworking;
-import com.androidnetworking.common.Priority;
-import com.androidnetworking.error.ANError;
-import com.androidnetworking.interfaces.JSONObjectRequestListener;
-import com.androidnetworking.interfaces.UploadProgressListener;
 import com.mvc.imagepicker.ImagePicker;
-
-import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -29,13 +21,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ir.sq.apps.sqclubside.R;
-import ir.sq.apps.sqclubside.controllers.Connection;
 import ir.sq.apps.sqclubside.controllers.ImageHandler;
 import ir.sq.apps.sqclubside.controllers.ImageUploader;
 import ir.sq.apps.sqclubside.controllers.UrlHandler;
-import ir.sq.apps.sqclubside.controllers.UserHandler;
-import ir.sq.apps.sqclubside.models.Club;
-import ir.sq.apps.sqclubside.uiControllers.ConnectionUi;
 import ir.sq.apps.sqclubside.uiControllers.ImagePreviewAdapter;
 import ir.sq.apps.sqclubside.uiControllers.TypeFaceHandler;
 
@@ -48,8 +36,8 @@ public class ImageActivity extends AppCompatActivity implements ImagePreviewAdap
     ImageView imageHeader;
     @BindView(R.id.submit_images_button)
     Button submitImagesButton;
-    @BindView(R.id.image_header_holder)
-    RelativeLayout imageHeaderHolder;
+    @BindView(R.id.no_image_textView)
+    TextView noImageTextView;
 
     private List<Bitmap> images = new ArrayList<>();
     private ImagePicker imagePicker;
@@ -67,6 +55,7 @@ public class ImageActivity extends AppCompatActivity implements ImagePreviewAdap
 
     private void setFonts() {
         submitImagesButton.setTypeface(TypeFaceHandler.getInstance(this).getFa_bold());
+        noImageTextView.setTypeface(TypeFaceHandler.getInstance(this).getFa_bold());
     }
 
     private void setUpImagePicker() {
@@ -91,7 +80,7 @@ public class ImageActivity extends AppCompatActivity implements ImagePreviewAdap
         Bitmap bitmap = ImagePicker.getImageFromResult(this, requestCode, resultCode, data);
         if (bitmap != null) {
             if (images.size() == 0) {
-                imageHeaderHolder.setVisibility(View.VISIBLE);
+                noImageTextView.setVisibility(View.GONE);
             }
             images.add(bitmap);
             adapter.notifyDataSetChanged();
@@ -106,10 +95,10 @@ public class ImageActivity extends AppCompatActivity implements ImagePreviewAdap
                 ImagePicker.pickImage(this, "عکس را انتخاب کنید:");
                 break;
             case R.id.submit_images_button:
-                UserHandler.getInstance().setImages(images);
-                if (images.size() > 0) {
-                    sendImagesToServer();
-                }
+//                UserHandler.getInstance().setImages(images);
+//                if (images.size() > 0) {
+//                    sendImagesToServer();
+//                }
                 startActivity(new Intent(ImageActivity.this, TagsActivity.class));
                 break;
 

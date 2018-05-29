@@ -6,4 +6,6 @@
     <string name="string_type_reserve_title">نوع رزرو :</string>
     <string name="string_hour_reserve">ساعتی</string>
     <string name="string_sans_reserve">سانسی</string>
+    <string name="string_no_image_preview">عکسی برای نمایش وجود ندارد</string>
+    <string name="string_add_tags">اضافه کردن تگ ها</string>
 </resources>

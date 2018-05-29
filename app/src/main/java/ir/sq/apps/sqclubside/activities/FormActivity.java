@@ -3,6 +3,7 @@ package ir.sq.apps.sqclubside.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
@@ -22,6 +24,7 @@ import com.google.android.gms.location.places.ui.PlacePicker;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import ir.sq.apps.sqclubside.controllers.PermissionHandler;
 import ir.sq.apps.sqclubside.uiControllers.ConnectionUi;
 import ir.sq.apps.sqclubside.R;
 import ir.sq.apps.sqclubside.uiControllers.TypeFaceHandler;
@@ -69,6 +72,8 @@ public class FormActivity extends AppCompatActivity {
     private EditText[] allEditTexts;
     private GoogleApiClient mGoogleApiClient;
     private int PLACE_PICKER_REQUEST = 1;
+    private Double latitude = -1.0;
+    private Double longitude = -1.0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +82,11 @@ public class FormActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         setFonts();
         setViews();
+        PermissionHandler.grantAllPermissions(this);
+        setUpLocationPicker();
+    }
+
+    private void setUpLocationPicker() {
         mGoogleApiClient = new GoogleApiClient
                 .Builder(this)
                 .addApi(Places.GEO_DATA_API)
@@ -84,10 +94,14 @@ public class FormActivity extends AppCompatActivity {
                 .enableAutoManage(this, new GoogleApiClient.OnConnectionFailedListener() {
                     @Override
                     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
+                        showLocationError();
                     }
                 })
                 .build();
+    }
+
+    private void showLocationError() {
+        Snackbar.make(clubLocationButton, "اتصال برقرار نشد لطفا دوباره تلاش کنید", Snackbar.LENGTH_SHORT).show();
     }
 
     @Override
@@ -144,10 +158,11 @@ public class FormActivity extends AppCompatActivity {
                 }
                 break;
             case R.id.submit_information_button:
-                if (checkEmptyFields()) {
-                    sendUserToServer();
-                    startActivity(new Intent(FormActivity.this, ImageActivity.class));
-                }
+//                if (checkEmptyFields()) {
+//                    createUser();
+//                    sendUserToServer();
+//                }
+                startActivity(new Intent(FormActivity.this, ImageActivity.class));
                 break;
         }
     }
@@ -157,32 +172,17 @@ public class FormActivity extends AppCompatActivity {
         if (requestCode == PLACE_PICKER_REQUEST) {
             if (resultCode == RESULT_OK) {
                 Place place = PlacePicker.getPlace(data, this);
-//                StringBuilder stBuilder = new StringBuilder();
-//                String placename = String.format("%s", place.getName());
-//                String latitude = String.valueOf(place.getLatLng().latitude);
-//                String longitude = String.valueOf(place.getLatLng().longitude);
-//                String address = String.format("%s", place.getAddress());
-//                stBuilder.append("Name: ");
-//                stBuilder.append(placename);
-//                stBuilder.append("\n");
-//                stBuilder.append("Latitude: ");
-//
-//                stBuilder.append("\n");
-//                stBuilder.append("Logitude: ");
-//                stBuilder.append(longitude);
-//                stBuilder.append("\n");
-//                stBuilder.append("Address: ");
-//                stBuilder.append(address);
-//                Log.i("LOCATION", stBuilder.toString());
-//                UserHandler.getInstance().getmClub().setLatitude(place.getLatLng().latitude);
-//                UserHandler.getInstance().getmClub().setLongtitude(place.getLatLng().longitude);
+                if (place != null) {
+                    latitude = place.getLatLng().latitude;
+                    longitude = place.getLatLng().longitude;
+                } else {
+                    showLocationError();
+                }
             }
         }
     }
 
     private void sendUserToServer() {
-        UserHandler.getInstance().createClub(allEditTexts[0].getText().toString(), clubOwnerEdittext.getText().toString(),
-                clubTelephonenumberEdittext.getText().toString(), clubCellphonenumberEdittext.getText().toString(), clubAddressEdittext.getText().toString());
         Connection connection = new Connection(UrlHandler.createUserURL.toString(), UserHandler.getInstance().getmClub().formToJson(), "POST", ConnectionUi.getDefault(this)) {
             @Override
             protected void onResult(String result) {
@@ -193,6 +193,13 @@ public class FormActivity extends AppCompatActivity {
             }
         };
         connection.execute();
+    }
+
+    private void createUser() {
+        UserHandler.getInstance().createClub(allEditTexts[0].getText().toString(), clubOwnerEdittext.getText().toString(),
+                clubTelephonenumberEdittext.getText().toString(), clubCellphonenumberEdittext.getText().toString(), clubAddressEdittext.getText().toString());
+        UserHandler.getInstance().getmClub().setLatitude(latitude);
+        UserHandler.getInstance().getmClub().setLongtitude(longitude);
     }
 
     private Boolean checkEmptyFields() {

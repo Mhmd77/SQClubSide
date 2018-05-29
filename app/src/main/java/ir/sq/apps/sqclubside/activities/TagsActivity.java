@@ -3,15 +3,22 @@ package ir.sq.apps.sqclubside.activities;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import com.nex3z.togglebuttongroup.MultiSelectToggleGroup;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import ir.sq.apps.sqclubside.R;
 import ir.sq.apps.sqclubside.uiControllers.LabelToggle;
 import ir.sq.apps.sqclubside.uiControllers.TypeFaceHandler;
@@ -28,8 +35,12 @@ public class TagsActivity extends AppCompatActivity {
     MultiSelectToggleGroup tagsGroupTypeSans;
     @BindView(R.id.tags_group_type_hour)
     MultiSelectToggleGroup tagsGroupTypeHour;
-    private String[] type1 = {"فوتبال", "shena", "فوتسال", "بسکتبال", "بیسبال", "والیبال", "کبدی", "شطرنج"};
-    private String[] type2 = {"فوتبال", "فوتسال", "بسکتبال", "بیسبال", "والیبال", "کبدی", "شطرنج"};
+    @BindView(R.id.type_text_view)
+    TextView typeTextView;
+    @BindView(R.id.submit_tags_button)
+    Button submitTagsButton;
+    private String[] typeSans = {"فوتبال", "shena", "فوتسال", "بسکتبال", "بیسبال", "والیبال", "کبدی", "شطرنج"};
+    private String[] typeHour = {"فوتبال", "فوتسال", "بسکتبال", "بیسبال", "والیبال", "کبدی", "شطرنج"};
     private int type = 0;
 
     @Override
@@ -38,10 +49,11 @@ public class TagsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_tags);
         ButterKnife.bind(this);
         setFonts();
-        addTagsTypeOne(tagsGroupTypeSans, type1);
-        addTagsTypeOne(tagsGroupTypeHour, type2);
+        addTagsType(tagsGroupTypeHour, typeHour);
+        addTagsType(tagsGroupTypeSans, typeSans);
         setRadioGroup();
     }
+
 
     private void setRadioGroup() {
         tagsGroupTypeHour.setVisibility(View.VISIBLE);
@@ -64,7 +76,7 @@ public class TagsActivity extends AppCompatActivity {
         });
     }
 
-    private void addTagsTypeOne(MultiSelectToggleGroup mstg, String[] types) {
+    private void addTagsType(MultiSelectToggleGroup mstg, String[] types) {
         for (String s : types) {
             LabelToggle labelToggle = new LabelToggle(this);
             labelToggle.setTextColor(ContextCompat.getColor(this, R.color.colorPrimary));
@@ -78,7 +90,26 @@ public class TagsActivity extends AppCompatActivity {
     }
 
     private void setFonts() {
-        typeHourRadioButton.setTypeface(TypeFaceHandler.getInstance(this).getEn_light());
-        typeSansRadioButton.setTypeface(TypeFaceHandler.getInstance(this).getEn_light());
+        typeHourRadioButton.setTypeface(TypeFaceHandler.getInstance(this).getFa_light());
+        typeSansRadioButton.setTypeface(TypeFaceHandler.getInstance(this).getFa_light());
+        typeTextView.setTypeface(TypeFaceHandler.getInstance(this).getFa_bold());
+    }
+
+    @OnClick(R.id.submit_tags_button)
+    public void onViewClicked() {
+        List<String> tags = getTagsList();
+
+    }
+
+    public List<String> getTagsList() {
+        List<String> tagsList = new ArrayList<>();
+        MultiSelectToggleGroup group = type == 0 ? tagsGroupTypeHour : tagsGroupTypeSans;
+        String[] tags = type == 0 ? typeHour : typeSans;
+        int subtractor = type == 0 ? tagsGroupTypeHour.getChildAt(0).getId() : tagsGroupTypeSans.getChildAt(0).getId();
+        for (int i : group.getCheckedIds()) {
+            tagsList.add(tags[i - subtractor]);
+        }
+        Log.i(TagsActivity.class.getSimpleName(), tagsList.toString());
+        return tagsList;
     }
 }

@@ -4,18 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/backgroundColor"
     android:orientation="vertical"
     android:weightSum="1"
-    android:background="@color/backgroundColor"
     tools:context="ir.sq.apps.sqclubside.activities.ImageActivity">
+
     <RelativeLayout
-        android:id="@+id/image_header_holder"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_margin="8dp"
-        android:visibility="gone"
         android:layout_weight="0.4"
         android:background="@drawable/background_round_image">
+
+        <TextView
+            android:id="@+id/no_image_textView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/string_no_image_preview"
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
 
         <ImageView
             android:id="@+id/image_header"
