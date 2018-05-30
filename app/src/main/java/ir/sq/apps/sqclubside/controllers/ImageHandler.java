@@ -17,7 +17,7 @@ public class ImageHandler {
         File outputDir = context.getCacheDir();
         File outputFile = File.createTempFile("temp", ".png", outputDir);
         FileOutputStream fOut = new FileOutputStream(outputFile);
-        bitmap.compress(Bitmap.CompressFormat.PNG, 95, fOut);
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 50, fOut);
         fOut.flush();
         fOut.close();
         return outputFile;
