@@ -30,6 +30,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import ir.sq.apps.sqclubside.R;
 import ir.sq.apps.sqclubside.controllers.UrlHandler;
+import ir.sq.apps.sqclubside.controllers.UserHandler;
+import ir.sq.apps.sqclubside.models.User;
 import ir.sq.apps.sqclubside.uiControllers.TypeFaceHandler;
 
 public class SignUpLogin extends AppCompatActivity implements View.OnClickListener {
@@ -63,7 +65,6 @@ public class SignUpLogin extends AppCompatActivity implements View.OnClickListen
     TextInputLayout passWord_signup_layout;
     @BindView(R.id.email_signup_layout)
     TextInputLayout email_signup_layout;
-
 
 
     LinearLayout llsignup;
@@ -240,7 +241,7 @@ public class SignUpLogin extends AppCompatActivity implements View.OnClickListen
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        AndroidNetworking.post(UrlHandler.signInUserURL.toString())
+        AndroidNetworking.post(UrlHandler.signInUserURL.getUrl())
                 .addJSONObjectBody(jsonObject)
                 .build()
                 .getAsJSONObject(new JSONObjectRequestListener() {
@@ -250,6 +251,7 @@ public class SignUpLogin extends AppCompatActivity implements View.OnClickListen
                             int status = response.getInt("status");
                             if (status == 1) {
                                 Log.i("SIGNIN", "Done");
+                                UserHandler.getInstance().setThisUser(new User(userName_signin.getText().toString(), passWord_signin.getText().toString()));
                                 startActivity(new Intent(SignUpLogin.this, FormActivity.class));
                             } else {
                                 String errorMessage = getString(R.string.string_wrong_username_or_password);
@@ -290,7 +292,7 @@ public class SignUpLogin extends AppCompatActivity implements View.OnClickListen
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        AndroidNetworking.post(UrlHandler.signUpUserURL.toString())
+        AndroidNetworking.post(UrlHandler.signUpUserURL.getUrl())
 
                 .addJSONObjectBody(jsonObject)
                 .build()
@@ -302,6 +304,7 @@ public class SignUpLogin extends AppCompatActivity implements View.OnClickListen
                             if (status == 1) {
                                 Log.i("SIGNUP", "Done");
                                 Toast.makeText(SignUpLogin.this, R.string.string_signup_message_done, Toast.LENGTH_SHORT).show();
+                                UserHandler.getInstance().setThisUser(new User(userName_signup.getText().toString(), passWord_signup.getText().toString()));
                                 startActivity(new Intent(SignUpLogin.this, FormActivity.class));
                             } else
                                 Log.e("SIGNUP", "Error In Response");

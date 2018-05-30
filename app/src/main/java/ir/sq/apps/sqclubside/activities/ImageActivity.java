@@ -110,7 +110,7 @@ public class ImageActivity extends AppCompatActivity implements ImagePreviewAdap
     private void sendImagesToServer() {
         for (int i = 0; i < images.size(); i++) {
             try {
-                RequestsHandler.uploadImageTo(ImageHandler.getImageFile(this, images.get(i)), UrlHandler.uploadeImageURL.toString());
+                RequestsHandler.uploadImageTo(ImageHandler.getImageFile(this, images.get(i)), UrlHandler.uploadeImageURL.getUrl());
             } catch (IOException e) {
                 e.printStackTrace();
             }

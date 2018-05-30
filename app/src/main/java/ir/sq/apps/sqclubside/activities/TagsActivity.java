@@ -1,5 +1,6 @@
 package ir.sq.apps.sqclubside.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -109,7 +110,9 @@ public class TagsActivity extends AppCompatActivity {
     public void onViewClicked() {
         List<String> tags = getTagsList();
         UserHandler.getInstance().getmClub().addTags(tags);
-        RequestsHandler.updateClubTo(UserHandler.getInstance().getmClub(), UrlHandler.createUserURL.toString());
+        RequestsHandler.updateClubTo(UserHandler.getInstance().getmClub(), UrlHandler.createUserURL.getUrl());
+        startActivity(new Intent(TagsActivity.this, TempActivity.class));
+        finish();
     }
 
     public List<String> getTagsList() {
@@ -124,7 +127,7 @@ public class TagsActivity extends AppCompatActivity {
     }
 
     public void getTagsFromServer() {
-        RequestsHandler.getTagsFrom(UrlHandler.getTagsURL.toString(), new OnResponse() {
+        RequestsHandler.getTagsFrom(UrlHandler.getTagsURL.getUrl(), new OnResponse() {
             @Override
             public void onTagsRecieved(JSONArray tags) {
                 parseTags(tags);

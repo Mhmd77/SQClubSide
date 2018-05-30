@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import java.util.List;
 
 import ir.sq.apps.sqclubside.models.Club;
+import ir.sq.apps.sqclubside.models.User;
 
 /**
  * Created by Mohammad on 5/27/2018.
@@ -13,6 +14,7 @@ import ir.sq.apps.sqclubside.models.Club;
 public class UserHandler {
     private static final UserHandler ourInstance = new UserHandler();
 
+    private User thisUser;
 
     private Club mClub;
 
@@ -24,7 +26,7 @@ public class UserHandler {
     }
 
     public void createClub(String name, String owner, String tele, String cell, String address) {
-        mClub = new Club(name, owner, tele, cell, address);
+        mClub = new Club(thisUser.getUserName(), name, owner, tele, cell, address);
     }
 
     public void setImages(List<Bitmap> images) {
@@ -41,6 +43,16 @@ public class UserHandler {
     }
 
     public Club getmClub() {
+
         return mClub;
+    }
+
+    public User getThisUser() {
+        return thisUser;
+    }
+
+    public void setThisUser(User thisUser) {
+        if (this.thisUser == null)
+            this.thisUser = thisUser;
     }
 }

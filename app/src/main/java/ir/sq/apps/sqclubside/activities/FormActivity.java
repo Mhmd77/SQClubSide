@@ -158,7 +158,7 @@ public class FormActivity extends AppCompatActivity {
                 if (checkEmptyFields()) {
                     createUser();
 //                    sendUserToServer();
-                    RequestsHandler.sendClubTo(UserHandler.getInstance().getmClub(), UrlHandler.createUserURL.toString());
+                    RequestsHandler.sendClubTo(UserHandler.getInstance().getmClub(), UrlHandler.createUserURL.getUrl());
                 }
                 startActivity(new Intent(FormActivity.this, ImageActivity.class));
                 break;
