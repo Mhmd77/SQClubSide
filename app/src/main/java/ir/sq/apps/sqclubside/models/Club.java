@@ -89,4 +89,8 @@ public class Club {
     public void setLongtitude(Double longtitude) {
         this.longtitude = longtitude;
     }
+
+    public void setType(int type) {
+        this.type = type;
+    }
 }
