@@ -135,7 +135,7 @@ public class RequestsHandler {
                         try {
                             int status = response.getInt("status");
                             if (status == Constants.SUCCESSFUL_CONNECTION) {
-                                Log.i(TAG, "response : " + response.toString());
+                                Log.i(TAG, "response:" + response.toString());
                             } else {
                                 Log.e(TAG, "Error In Response");
                             }

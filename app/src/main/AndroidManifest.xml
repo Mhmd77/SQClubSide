@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -15,9 +15,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.FormActivity">
-
-        </activity>
+        <activity android:name=".activities.FormActivity"></activity>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -25,14 +23,14 @@
 
         <activity android:name=".activities.ImageActivity" />
         <activity android:name=".activities.TagsActivity" />
-        <activity
-            android:name=".activities.SignUpLogin">
-
+        <activity android:name=".activities.SignUpLogin">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activities.TempActivity"></activity>
     </application>
 
 </manifest>

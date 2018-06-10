@@ -41,5 +41,24 @@ public enum UrlHandler {
             url = url + "/" + UserHandler.getInstance().getPassWord();
         }
         return url;
+    private UrlHandler(String url, Boolean hasUserName, Boolean hasPassWord) {
+        this.url = url;
+        if (hasUserName) {
+            this.hasUserName = hasUserName;
+        }
+        if (hasPassWord) {
+            this.hasPassWord = hasPassWord;
+        }
+    }
+
+    public String getUrl() {
+        String url = baseUrl + this.url;
+        if (hasUserName) {
+            url = url + "/" + UserHandler.getInstance().getThisUser().getUserName();
+        }
+        if (hasPassWord) {
+            url = url + "/" + UserHandler.getInstance().getThisUser().getPassWord();
+        }
+        return url;
     }
 }

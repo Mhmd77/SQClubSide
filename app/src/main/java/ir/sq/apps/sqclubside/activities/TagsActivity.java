@@ -1,5 +1,6 @@
 package ir.sq.apps.sqclubside.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -49,7 +50,7 @@ public class TagsActivity extends AppCompatActivity {
     Button submitTagsButton;
     private List<String> typeSans = new ArrayList<>();
     private List<String> typeHour = new ArrayList<>();
-    private int type = 0;
+    private int type = Constants.TYPE_NONE;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,6 +110,10 @@ public class TagsActivity extends AppCompatActivity {
     public void onViewClicked() {
         List<String> tags = getTagsList();
         UserHandler.getInstance().getmClub().addTags(tags);
+        UserHandler.getInstance().getmClub().setType(type);
+        RequestsHandler.updateClubTo(UserHandler.getInstance().getmClub(), UrlHandler.createUserURL.getUrl());
+        startActivity(new Intent(TagsActivity.this, TempActivity.class));
+        finish();
         RequestsHandler.updateClubTo(UserHandler.getInstance().getmClub(), UrlHandler.createUserURL.getUrl());
     }
 

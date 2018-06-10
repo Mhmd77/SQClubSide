@@ -24,8 +24,6 @@ public class Club {
 //    private Double rate;
 
     private String name;
-
-
     private String ownerUserName;
     private String owner;
     private String telePhoneNumber;
@@ -38,7 +36,7 @@ public class Club {
     private List<Bitmap> images;
     private List<String> tags;
 
-    public Club(String ownerUserName, String name, String owner, String telePhoneNumber, String cellPhoneNumber, String adress) {
+    public Club(String ownerUserName,String name, String owner, String telePhoneNumber, String cellPhoneNumber, String adress) {
         this.name = name;
         this.owner = owner;
         this.telePhoneNumber = telePhoneNumber;
@@ -89,7 +87,10 @@ public class Club {
     }
 
     public void setLongtitude(Double longtitude) {
-
         this.longtitude = longtitude;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 }
