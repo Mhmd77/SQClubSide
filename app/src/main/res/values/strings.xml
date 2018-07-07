@@ -17,4 +17,6 @@
     <string name="string_no_image_preview">عکسی برای نمایش وجود ندارد</string>
     <string name="string_add_tags">اضافه کردن تگ ها</string>
     <string name="string_message_create_club">باشگاه شما با موفقیت ثبت شد !</string>
+    <string name="title_activity_google_map">GoogleMapActivity</string>
+    <string name="title_activity_maps">Map</string>
 </resources>
