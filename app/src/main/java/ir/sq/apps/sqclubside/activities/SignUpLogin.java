@@ -1,6 +1,7 @@
 package ir.sq.apps.sqclubside.activities;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -20,9 +21,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.androidnetworking.AndroidNetworking;
+import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
+import com.androidnetworking.interfaces.BitmapRequestListener;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -31,6 +35,7 @@ import butterknife.ButterKnife;
 import ir.sq.apps.sqclubside.R;
 import ir.sq.apps.sqclubside.controllers.UrlHandler;
 import ir.sq.apps.sqclubside.controllers.UserHandler;
+import ir.sq.apps.sqclubside.models.Club;
 import ir.sq.apps.sqclubside.models.User;
 import ir.sq.apps.sqclubside.uiControllers.TypeFaceHandler;
 
@@ -247,12 +252,14 @@ public class SignUpLogin extends AppCompatActivity implements View.OnClickListen
                 .getAsJSONObject(new JSONObjectRequestListener() {
                     @Override
                     public void onResponse(JSONObject response) {
+                        Log.i("SIGNIN", response.toString());
                         try {
+
                             int status = response.getInt("status");
                             if (status == 1) {
                                 Log.i("SIGNIN", "Done");
-                                UserHandler.getInstance().setThisUser(new User(userName_signin.getText().toString(), passWord_signin.getText().toString()));
-                                startActivity(new Intent(SignUpLogin.this, FormActivity.class));
+
+                                createUser(response.getJSONObject("object"));
                             } else {
                                 String errorMessage = getString(R.string.string_wrong_username_or_password);
                                 Snackbar.make(signInbutton, errorMessage, Snackbar.LENGTH_SHORT).show();
@@ -272,6 +279,62 @@ public class SignUpLogin extends AppCompatActivity implements View.OnClickListen
                     }
                 });
 
+    }
+
+    private void createUser(JSONObject object) throws JSONException {
+        String name = object.getString("name");
+        String userName = object.getString("userName");
+        String password = object.getString("passWord");
+        String email = object.getString("email");
+        int credit = object.getInt("credit");
+        JSONObject jsonObjectClub = object.getJSONObject("club");
+        String clubName = jsonObjectClub.getString("name");
+        String clubTele = jsonObjectClub.getString("telePhoneNumber");
+        String clubCell = jsonObjectClub.getString("cellPhoneNumber");
+        String clubAddress = jsonObjectClub.getString("address");
+        String clubOpeningTime = jsonObjectClub.getString("openingTime");
+        String clubCloseTime = jsonObjectClub.getString("closingTime");
+        int clubType = jsonObjectClub.getInt("type");
+        boolean isVerified = jsonObjectClub.getBoolean("verified");
+
+        User user = new User(name, userName, email, password, isVerified);
+        Club club = new Club(userName, clubName, name, clubTele, clubCell, clubAddress);
+
+        JSONArray imagesJsonArray = jsonObjectClub.getJSONArray("images");
+        JSONArray tagsJsonArray = jsonObjectClub.getJSONArray("tagList");
+        for (int j = 0; j < tagsJsonArray.length(); j++) {
+            club.addTags(tagsJsonArray.getJSONObject(j).getString("name"));
+        }
+        for (int j = 0; j < imagesJsonArray.length(); j++) {
+            String img = ((JSONObject) imagesJsonArray.get(j)).getString("name");
+            club.addNameImage(img);
+            getImageFrom(club, String.valueOf(img));
+        }
+        UserHandler.getInstance().setThisUser(user);
+        UserHandler.getInstance().setmClub(club);
+
+    }
+
+    private void getImageFrom(final Club club, final String imageUrl) {
+        final String url = UrlHandler.getImageClubURL.getUrl() + imageUrl;
+        AndroidNetworking.get(url)
+                .setPriority(Priority.MEDIUM)
+                .setBitmapMaxHeight(100)
+                .setBitmapMaxWidth(100)
+                .setBitmapConfig(Bitmap.Config.ARGB_8888)
+                .build()
+                .getAsBitmap(new BitmapRequestListener() {
+                    @Override
+                    public void onResponse(Bitmap bitmap) {
+                        Log.i("IMAGE LOAD", "url: " + url);
+                        club.addImage(bitmap);
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+                        Log.e("IMAGE LOAD", "url : " + url + " error message: " + anError.getErrorBody() + " code : " + anError.getErrorBody());
+                    }
+                });
     }
 
     private void emptyFields() {
@@ -304,8 +367,6 @@ public class SignUpLogin extends AppCompatActivity implements View.OnClickListen
                             if (status == 1) {
                                 Log.i("SIGNUP", "Done");
                                 Toast.makeText(SignUpLogin.this, R.string.string_signup_message_done, Toast.LENGTH_SHORT).show();
-                                UserHandler.getInstance().setThisUser(new User(userName_signup.getText().toString(), passWord_signup.getText().toString()));
-                                startActivity(new Intent(SignUpLogin.this, FormActivity.class));
                             } else
                                 Log.e("SIGNUP", "Error In Response");
                         } catch (JSONException e) {

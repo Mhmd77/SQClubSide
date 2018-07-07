@@ -42,7 +42,6 @@ public class ImageActivity extends AppCompatActivity implements ImagePreviewAdap
     TextView noImageTextView;
 
     private List<Bitmap> images = new ArrayList<>();
-    private ImagePicker imagePicker;
     private ImagePreviewAdapter adapter;
 
     @Override

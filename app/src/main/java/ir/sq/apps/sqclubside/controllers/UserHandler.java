@@ -13,13 +13,9 @@ import ir.sq.apps.sqclubside.models.User;
 
 public class UserHandler {
     private static final UserHandler ourInstance = new UserHandler();
-
     private User thisUser;
-
     private Club mClub;
 
-    private String userName;
-    private String passWord;
 
     public static UserHandler getInstance() {
         return ourInstance;
@@ -29,7 +25,6 @@ public class UserHandler {
     }
 
     public void createClub(String name, String owner, String tele, String cell, String address) {
-        mClub = new Club(userName, name, owner, tele, cell, address);
         mClub = new Club(thisUser.getUserName(), name, owner, tele, cell, address);
     }
 
@@ -51,22 +46,6 @@ public class UserHandler {
         return mClub;
     }
 
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public void setPassWord(String passWord) {
-        this.passWord = passWord;
-    }
-
-    public String getPassWord() {
-        return passWord;
-    }
-
     public User getThisUser() {
         return thisUser;
     }
@@ -74,5 +53,9 @@ public class UserHandler {
     public void setThisUser(User thisUser) {
         if (this.thisUser == null)
             this.thisUser = thisUser;
+    }
+
+    public void setmClub(Club mClub) {
+        this.mClub = mClub;
     }
 }

@@ -34,9 +34,13 @@ public class Club {
 //    private String closeTime;
 
     private List<Bitmap> images;
+    public List<String> getNameImages() {
+        return nameImages;
+    }
+    private List<String> nameImages;
     private List<String> tags;
 
-    public Club(String ownerUserName,String name, String owner, String telePhoneNumber, String cellPhoneNumber, String adress) {
+    public Club(String ownerUserName, String name, String owner, String telePhoneNumber, String cellPhoneNumber, String adress) {
         this.name = name;
         this.owner = owner;
         this.telePhoneNumber = telePhoneNumber;
@@ -45,6 +49,7 @@ public class Club {
         this.ownerUserName = ownerUserName;
         images = new ArrayList<>();
         tags = new ArrayList<>();
+        nameImages = new ArrayList<>();
     }
 
     public void addImages(List<Bitmap> images) {
@@ -92,5 +97,21 @@ public class Club {
 
     public void setType(int type) {
         this.type = type;
+    }
+
+    public void addTags(String tag) {
+        this.tags.add(tag);
+    }
+
+    public void addImage(Bitmap bitmap) {
+        images.add(bitmap);
+    }
+
+    public void addNameImage(String img) {
+        nameImages.add(img);
+    }
+
+    public String getImageName(int pos) {
+        return nameImages.get(pos);
     }
 }
