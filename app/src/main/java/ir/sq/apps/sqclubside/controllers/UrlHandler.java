@@ -10,7 +10,9 @@ public enum UrlHandler {
     signInUserURL("users/login"),
     createUserURL("clubs", false, true),
     getTagsURL("clubs/tags"),
+    getImageClubURL(""),
     uploadeImageURL("images", true, true);
+
 
     private String url;
     private String baseUrl = "http://192.168.43.82:8080/api/";
