@@ -77,7 +77,7 @@ public class ClubProfileActivity extends AppCompatActivity {
         }
         txtClubName.setText(club.getName());
         txtClubAdress.setText(club.getAddress());
-        txtClubPrice.setText("500 تومان");
+        txtClubPrice.setText("5000 تومان");
         setStars(4.5);
         setTags();
     }

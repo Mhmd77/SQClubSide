@@ -1,18 +1,23 @@
 package ir.sq.apps.sqclubside.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class User {
     private String name;
     private String userName;
     private String email;
     private String passWord;
     private boolean verified;
+    private List<Receipt> receipts;
 
     public User(String name, String userName, String email, String passWord, boolean verified) {
         this.name = name;
         this.userName = userName;
         this.email = email;
-        this.passWord = passWord;
         this.verified = verified;
+        this.passWord = passWord;
+        this.receipts = new ArrayList<>();
     }
 
     public String getUserName() {
@@ -45,5 +50,13 @@ public class User {
 
     public void setVerified(boolean verified) {
         this.verified = verified;
+    }
+
+    public void addReceipt(Receipt receipt) {
+        receipts.add(receipt);
+    }
+
+    public List<Receipt> getReceipts() {
+        return receipts;
     }
 }

@@ -36,6 +36,7 @@ import ir.sq.apps.sqclubside.R;
 import ir.sq.apps.sqclubside.controllers.UrlHandler;
 import ir.sq.apps.sqclubside.controllers.UserHandler;
 import ir.sq.apps.sqclubside.models.Club;
+import ir.sq.apps.sqclubside.models.Receipt;
 import ir.sq.apps.sqclubside.models.User;
 import ir.sq.apps.sqclubside.uiControllers.TypeFaceHandler;
 
@@ -309,11 +310,12 @@ public class SignUpLogin extends AppCompatActivity implements View.OnClickListen
         String clubCloseTime = jsonObjectClub.getString("closingTime");
         int clubType = jsonObjectClub.getInt("type");
         boolean isVerified = jsonObjectClub.getBoolean("verified");
-
         User user = new User(name, userName, email, password, isVerified);
         Club club = new Club(userName, clubName, name, clubTele, clubCell, clubAddress);
         JSONArray imagesJsonArray = jsonObjectClub.getJSONArray("images");
         JSONArray tagsJsonArray = jsonObjectClub.getJSONArray("tagList");
+        JSONArray receiptsArray = object.getJSONArray("receipts");
+        setReceipts(user, receiptsArray);
         for (int j = 0; j < tagsJsonArray.length(); j++) {
             club.addTags(tagsJsonArray.getJSONObject(j).getString("name"));
         }
@@ -325,6 +327,17 @@ public class SignUpLogin extends AppCompatActivity implements View.OnClickListen
         UserHandler.getInstance().setThisUser(user);
         UserHandler.getInstance().setmClub(club);
         return true;
+    }
+
+    private void setReceipts(User user, JSONArray receiptsArray) throws JSONException {
+        for (int j = 0; j < receiptsArray.length(); j++) {
+            JSONObject receiptObject = receiptsArray.getJSONObject(j);
+            int price = receiptObject.getInt("price");
+            String date = receiptObject.getString("date");
+            String time = receiptObject.getString("time");
+            Receipt receipt = new Receipt(price, date, time);
+            user.addReceipt(receipt);
+        }
     }
 
     private void getImageFrom(final Club club, final String imageUrl) {
