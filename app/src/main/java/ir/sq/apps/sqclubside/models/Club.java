@@ -36,12 +36,12 @@ public class Club {
     private List<Bitmap> images;
     private List<String> tags;
 
-    public Club(String ownerUserName, String name, String owner, String telePhoneNumber, String cellPhoneNumber, String adress) {
+    public Club(String ownerUserName, String name, String owner, String telePhoneNumber, String cellPhoneNumber, String address) {
         this.name = name;
         this.owner = owner;
         this.telePhoneNumber = telePhoneNumber;
         this.cellPhoneNumber = cellPhoneNumber;
-        this.address = adress;
+        this.address = address;
         this.ownerUserName = ownerUserName;
         images = new ArrayList<>();
         tags = new ArrayList<>();
@@ -107,9 +107,6 @@ public class Club {
         images.add(bitmap);
     }
 
-    public void addNameImage(String img) {
-        nameImages.add(img);
-    }
 
     public String getImageName(int pos) {
         return nameImages.get(pos);
@@ -160,9 +157,5 @@ public class Club {
     }
     public void addNameImage(String img) {
         nameImages.add(img);
-    }
-
-    public String getImageName(int pos) {
-        return nameImages.get(pos);
     }
 }

@@ -258,8 +258,16 @@ public class SignUpLogin extends AppCompatActivity implements View.OnClickListen
                             int status = response.getInt("status");
                             if (status == 1) {
                                 Log.i("SIGNIN", "Done");
+                                if (!createUser(response.getJSONObject("object"))) {
+                                    startActivity(new Intent(SignUpLogin.this, FormActivity.class));
+                                } else {
+                                    if (UserHandler.getInstance().getThisUser().isVerified()) {
+                                        startActivity(new Intent(SignUpLogin.this, ClubProfileActivity.class));
+                                    } else {
+                                        startActivity(new Intent(SignUpLogin.this, FormActivity.class));
+                                    }
+                                }
 
-                                createUser(response.getJSONObject("object"));
                             } else {
                                 String errorMessage = getString(R.string.string_wrong_username_or_password);
                                 Snackbar.make(signInbutton, errorMessage, Snackbar.LENGTH_SHORT).show();
@@ -281,12 +289,17 @@ public class SignUpLogin extends AppCompatActivity implements View.OnClickListen
 
     }
 
-    private void createUser(JSONObject object) throws JSONException {
+    private boolean createUser(JSONObject object) throws JSONException {
         String name = object.getString("name");
         String userName = object.getString("userName");
         String password = object.getString("passWord");
         String email = object.getString("email");
         int credit = object.getInt("credit");
+        if (object.isNull("club")) {
+            User user = new User(name, userName, email, password, false);
+            UserHandler.getInstance().setThisUser(user);
+            return false;
+        }
         JSONObject jsonObjectClub = object.getJSONObject("club");
         String clubName = jsonObjectClub.getString("name");
         String clubTele = jsonObjectClub.getString("telePhoneNumber");
@@ -299,7 +312,6 @@ public class SignUpLogin extends AppCompatActivity implements View.OnClickListen
 
         User user = new User(name, userName, email, password, isVerified);
         Club club = new Club(userName, clubName, name, clubTele, clubCell, clubAddress);
-
         JSONArray imagesJsonArray = jsonObjectClub.getJSONArray("images");
         JSONArray tagsJsonArray = jsonObjectClub.getJSONArray("tagList");
         for (int j = 0; j < tagsJsonArray.length(); j++) {
@@ -312,7 +324,7 @@ public class SignUpLogin extends AppCompatActivity implements View.OnClickListen
         }
         UserHandler.getInstance().setThisUser(user);
         UserHandler.getInstance().setmClub(club);
-
+        return true;
     }
 
     private void getImageFrom(final Club club, final String imageUrl) {
