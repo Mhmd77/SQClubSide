@@ -34,10 +34,6 @@ public class Club {
 //    private String closeTime;
 
     private List<Bitmap> images;
-    public List<String> getNameImages() {
-        return nameImages;
-    }
-    private List<String> nameImages;
     private List<String> tags;
 
     public Club(String ownerUserName, String name, String owner, String telePhoneNumber, String cellPhoneNumber, String adress) {
@@ -51,7 +47,11 @@ public class Club {
         tags = new ArrayList<>();
         nameImages = new ArrayList<>();
     }
+    public List<String> getNameImages() {
+        return nameImages;
+    }
 
+    private List<String> nameImages;
     public void addImages(List<Bitmap> images) {
         this.images.addAll(images);
     }
@@ -107,6 +107,57 @@ public class Club {
         images.add(bitmap);
     }
 
+    public void addNameImage(String img) {
+        nameImages.add(img);
+    }
+
+    public String getImageName(int pos) {
+        return nameImages.get(pos);
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public Double getLongtitude() {
+        return longtitude;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getOwnerUserName() {
+        return ownerUserName;
+    }
+
+    public String getOwner() {
+        return owner;
+    }
+
+    public String getTelePhoneNumber() {
+        return telePhoneNumber;
+    }
+
+    public String getCellPhoneNumber() {
+        return cellPhoneNumber;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public List<Bitmap> getImages() {
+        return images;
+    }
+
+    public List<String> getTags() {
+        return tags;
+    }
     public void addNameImage(String img) {
         nameImages.add(img);
     }
