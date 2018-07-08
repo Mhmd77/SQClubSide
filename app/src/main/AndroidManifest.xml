@@ -24,16 +24,14 @@
         <activity android:name=".activities.ImageActivity" />
         <activity android:name=".activities.TagsActivity" />
         <activity android:name=".activities.SignUpLogin">
-
-        </activity>
-        <activity android:name=".activities.ClubProfileActivity" />
-        <activity android:name=".activities.MapsActivity" />
-        <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".activities.ClubProfileActivity" />
+        <activity android:name=".activities.MapsActivity" >
+
         </activity>
     </application>
 
