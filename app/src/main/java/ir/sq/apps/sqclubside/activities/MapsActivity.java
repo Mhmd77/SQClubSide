@@ -11,6 +11,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import ir.sq.apps.sqclubside.R;
+import ir.sq.apps.sqclubside.controllers.UrlHandler;
+import ir.sq.apps.sqclubside.controllers.UserHandler;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -32,8 +34,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
 
 
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+//        LatLng loc = new LatLng(35.712910, 51.432192);
+        double latitude = UserHandler.getInstance().getmClub().getLatitude();
+        double longtitude = UserHandler.getInstance().getmClub().getLongtitude();
+        LatLng loc = new LatLng(latitude, longtitude);
+        mMap.addMarker(new MarkerOptions().position(loc).title(UserHandler.getInstance().getmClub().getName()));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(loc));
     }
 }

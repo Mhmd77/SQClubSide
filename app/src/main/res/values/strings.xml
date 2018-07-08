@@ -1,12 +1,10 @@
 <resources>
     <string name="app_name">SQClubSide</string>
-    <string name="title_activity_club_location">نقشه باشگاه</string>
     <string name="empty_field_error_meesage">این فیلد نمی تواند خالی باشد</string>
     <string name="string_add_images">اضافه کردن عکس ها</string>
     <string name="string_type_reserve_title">نوع رزرو :</string>
     <string name="string_hour_reserve">ساعتی</string>
     <string name="string_sans_reserve">سانسی</string>
-    <string name="title_activity_sign_up_login">SignUpLogin</string>
     <string name="string_username">نام کاربری</string>
     <string name="string_password">رمز عبور</string>
     <string name="string_email">ایمیل</string>
@@ -16,7 +14,7 @@
     <string name="string_signup_message_done">ثبت نام با موفقیت انجام شد</string>
     <string name="string_no_image_preview">عکسی برای نمایش وجود ندارد</string>
     <string name="string_add_tags">اضافه کردن تگ ها</string>
-    <string name="string_message_create_club">باشگاه شما با موفقیت ثبت شد !</string>
-    <string name="title_activity_google_map">GoogleMapActivity</string>
-    <string name="title_activity_maps">Map</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

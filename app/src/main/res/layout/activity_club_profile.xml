@@ -100,11 +100,13 @@
                     android:text="Location"
                     android:textColor="#FFF" />
 
-                <ImageView
+                <ImageButton
+                    android:id="@+id/btnLocation"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:src="@drawable/ic_location_on_black_18dp" />
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/ic_location_on_white_24dp" />
             </LinearLayout>
 
             <View
@@ -122,6 +124,7 @@
 
             <View
                 android:layout_width="wrap_content"
+                android:visibility="gone"
                 android:layout_height="0dp"
                 android:layout_weight="1" />
 
@@ -131,6 +134,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/background_color_button"
                 android:text="رزرو سالن"
+                android:visibility="gone"
                 android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                 android:textColor="#FFF"
                 android:textStyle="bold" />

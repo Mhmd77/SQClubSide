@@ -1,5 +1,6 @@
 package ir.sq.apps.sqclubside.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -22,7 +23,6 @@ import ir.sq.apps.sqclubside.models.Club;
 import ir.sq.apps.sqclubside.uiControllers.ClubImageLoadingService;
 import ir.sq.apps.sqclubside.uiControllers.TagsListAdapter;
 import ir.sq.apps.sqclubside.uiControllers.TypeFaceHandler;
-import ir.sq.apps.sqclubside.utils.Constants;
 import ss.com.bannerslider.Slider;
 import ss.com.bannerslider.adapters.SliderAdapter;
 import ss.com.bannerslider.viewholder.ImageSlideViewHolder;
@@ -118,8 +118,11 @@ public class ClubProfileActivity extends AppCompatActivity {
         }
     }
 
-    @OnClick(R.id.btnReserve)
+
+
+    @OnClick(R.id.btnLocation)
     public void onViewClicked() {
+        startActivity(new Intent(ClubProfileActivity.this,MapsActivity.class));
     }
 
     private class MySliderAdapter extends SliderAdapter {
