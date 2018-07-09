@@ -263,7 +263,7 @@ public class SignUpLogin extends AppCompatActivity implements View.OnClickListen
                                     startActivity(new Intent(SignUpLogin.this, FormActivity.class));
                                 } else {
                                     if (UserHandler.getInstance().getThisUser().isVerified()) {
-                                        startActivity(new Intent(SignUpLogin.this, ClubProfileActivity.class));
+                                        startActivity(new Intent(SignUpLogin.this, MainActivity.class));
                                     } else {
                                         startActivity(new Intent(SignUpLogin.this, FormActivity.class));
                                     }
