@@ -284,6 +284,9 @@ public class SignUpLogin extends AppCompatActivity implements View.OnClickListen
                     @Override
                     public void onError(ANError error) {
                         Log.e("SIGN IN", "ERROR: " + error.getErrorBody() + " code : " + error.getErrorCode());
+                        if (error.getErrorCode() == 400) {
+                            Snackbar.make(signUpbutton, getString(R.string.string_wrong_username_or_password), Snackbar.LENGTH_SHORT).show();
+                        }
 
                     }
                 });

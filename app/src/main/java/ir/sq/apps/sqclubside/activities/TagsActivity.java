@@ -113,7 +113,7 @@ public class TagsActivity extends AppCompatActivity {
         UserHandler.getInstance().getmClub().setType(type);
         RequestsHandler.updateClubTo(UserHandler.getInstance().getmClub(), UrlHandler.createUserURL.getUrl());
         RequestsHandler.updateClubTo(UserHandler.getInstance().getmClub(), UrlHandler.createUserURL.getUrl());
-        startActivity(new Intent(TagsActivity.this, ClubProfileActivity.class));
+        startActivity(new Intent(TagsActivity.this, MainActivity.class));
         finish();
     }
 
