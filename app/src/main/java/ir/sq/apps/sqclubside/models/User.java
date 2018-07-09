@@ -10,6 +10,7 @@ public class User {
     private String passWord;
     private boolean verified;
     private List<Receipt> receipts;
+    private int credit;
 
     public User(String name, String userName, String email, String passWord, boolean verified) {
         this.name = name;
@@ -58,5 +59,9 @@ public class User {
 
     public List<Receipt> getReceipts() {
         return receipts;
+    }
+
+    public void setCredit(int credit) {
+        this.credit = credit;
     }
 }

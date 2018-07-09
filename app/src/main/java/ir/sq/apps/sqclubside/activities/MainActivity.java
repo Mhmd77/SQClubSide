@@ -22,10 +22,11 @@ import butterknife.ButterKnife;
 import ir.sq.apps.sqclubside.R;
 import ir.sq.apps.sqclubside.fragments.PlanFragment;
 import ir.sq.apps.sqclubside.fragments.ProfileFragment;
+import ir.sq.apps.sqclubside.fragments.ReceiptsFragment;
 import ir.sq.apps.sqclubside.uiControllers.TypeFaceHandler;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, ProfileFragment.OnFragmentInteractionListener,
-        PlanFragment.OnFragmentInteractionListener {
+        PlanFragment.OnFragmentInteractionListener ,ReceiptsFragment.OnFragmentInteractionListener{
 
     @BindView(R.id.toolbarTitle)
     TextView toolbarTitle;
@@ -74,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             getSupportActionBar().setDisplayShowTitleEnabled(false);
         }
         setToolbarTitle();
-        toolbar.setNavigationIcon(R.drawable.ic_menu_black_24dp);
+        toolbar.setNavigationIcon(R.drawable.ic_menu_white_24dp);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -122,7 +123,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 return PlanFragment.newInstance();
             // plan
             case 1:
-                return ProfileFragment.newInstance();
+                return ReceiptsFragment.newInstance();
             // receipts
             case 2:
                 // profile

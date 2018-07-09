@@ -12,7 +12,7 @@ public enum UrlHandler {
 
 
     private String url;
-    private String baseUrl = "http://192.168.43.82:8080/api/";
+    private String baseUrl = "http://192.168.43.191:8080/api/";
     private Boolean hasPassWord = false, hasUserName = false;
 
     private UrlHandler(String url) {

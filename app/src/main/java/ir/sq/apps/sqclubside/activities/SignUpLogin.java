@@ -301,6 +301,7 @@ public class SignUpLogin extends AppCompatActivity implements View.OnClickListen
         int credit = object.getInt("credit");
         if (object.isNull("club")) {
             User user = new User(name, userName, email, password, false);
+            user.setCredit(credit);
             UserHandler.getInstance().setThisUser(user);
             return false;
         }
