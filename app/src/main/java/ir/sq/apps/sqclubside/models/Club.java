@@ -35,6 +35,8 @@ public class Club {
 
     private List<Bitmap> images;
     private List<String> tags;
+    private List<Plan> plans;
+    private List<String> nameImages;
 
     public Club(String ownerUserName, String name, String owner, String telePhoneNumber, String cellPhoneNumber, String address) {
         this.name = name;
@@ -46,12 +48,12 @@ public class Club {
         images = new ArrayList<>();
         tags = new ArrayList<>();
         nameImages = new ArrayList<>();
+        plans = new ArrayList<>();
     }
     public List<String> getNameImages() {
         return nameImages;
     }
 
-    private List<String> nameImages;
     public void addImages(List<Bitmap> images) {
         this.images.addAll(images);
     }
@@ -157,5 +159,13 @@ public class Club {
     }
     public void addNameImage(String img) {
         nameImages.add(img);
+    }
+
+    public void addPlan(Plan plan) {
+        plans.add(plan);
+    }
+
+    public List<Plan> getPlans() {
+        return plans;
     }
 }

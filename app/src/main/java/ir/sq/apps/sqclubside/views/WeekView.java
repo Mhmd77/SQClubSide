@@ -1584,17 +1584,6 @@ public class WeekView extends View {
         return mDayNameLength;
     }
 
-    /**
-     * Set the length of the day name displayed in the header row. Example of short day names is
-     * 'M' for 'Monday' and example of long day names is 'Mon' for 'Monday'.
-     * <p>
-     * <b>Note:</b> Use {@link #setDateTimeInterpreter(DateTimeInterpreter)} instead.
-     * </p>
-     *
-     * @param length Supported values are {@link com.alamkanak.weekview.WeekView#LENGTH_SHORT} and
-     *               {@link com.alamkanak.weekview.WeekView#LENGTH_LONG}.
-     */
-    @Deprecated
     public void setDayNameLength(int length) {
         if (length != LENGTH_LONG && length != LENGTH_SHORT) {
             throw new IllegalArgumentException("length parameter must be either LENGTH_LONG or LENGTH_SHORT");
@@ -2050,12 +2039,6 @@ public class WeekView extends View {
     }
 
     public interface EventLongPressListener {
-        /**
-         * Similar to {@link com.alamkanak.weekview.WeekView.EventClickListener} but with a long press.
-         *
-         * @param event:     event clicked.
-         * @param eventRect: view containing the clicked event.
-         */
         void onEventLongPress(WeekViewEvent event, RectF eventRect);
     }
 
@@ -2069,11 +2052,6 @@ public class WeekView extends View {
     }
 
     public interface EmptyViewLongPressListener {
-        /**
-         * Similar to {@link com.alamkanak.weekview.WeekView.EmptyViewClickListener} but with long press.
-         *
-         * @param time: {@link Calendar} object set with the date and time of the long pressed position on the view.
-         */
         void onEmptyViewLongPress(Calendar time);
     }
 

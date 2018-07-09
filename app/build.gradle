@@ -44,11 +44,11 @@ dependencies {
     implementation 'com.android.support:recyclerview-v7:27.1.1'
     implementation 'com.github.Mariovc:ImagePicker:1.2.2'
     implementation 'com.squareup.picasso:picasso:2.71828'
-
     implementation 'com.nex3z:toggle-button-group:1.1.4'
     implementation 'com.amitshekhar.android:android-networking:1.0.1'
     implementation 'com.amitshekhar.android:jackson-android-networking:1.0.1'
     implementation 'com.ss.bannerslider:bannerslider:2.0.0'
     implementation 'com.specyci:residemenu:1.6+'
+    implementation 'com.github.samanzamani.persiandate:PersianDate:0.3'
 }
 apply plugin: 'com.google.gms.google-services'

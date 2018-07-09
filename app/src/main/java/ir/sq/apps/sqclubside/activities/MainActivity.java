@@ -20,10 +20,12 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ir.sq.apps.sqclubside.R;
+import ir.sq.apps.sqclubside.fragments.PlanFragment;
 import ir.sq.apps.sqclubside.fragments.ProfileFragment;
 import ir.sq.apps.sqclubside.uiControllers.TypeFaceHandler;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, ProfileFragment.OnFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, ProfileFragment.OnFragmentInteractionListener,
+        PlanFragment.OnFragmentInteractionListener {
 
     @BindView(R.id.toolbarTitle)
     TextView toolbarTitle;
@@ -34,11 +36,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public static int navItemIndex = 0;
 
     // tags used to attach the fragments
-    private static final String TAG_CALENDAR = "calendar";
+    private static final String TAG_PLAN = "plan";
     private static final String TAG_RECEIPT = "receipt";
     private static final String TAG_PROFILE = "profile";
     private static final String TAG_SETTINGS = "setting";
-    private static String CURRENT_TAG = TAG_CALENDAR;
+    private static String CURRENT_TAG = TAG_PLAN;
     private String titles[] = {"Calendar", "Receipts", "Profile", "Settings"};
     // toolbar titles respected to selected nav menu item
 
@@ -59,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setUpMenu();
         if (savedInstanceState == null) {
             navItemIndex = 0;
-            CURRENT_TAG = TAG_CALENDAR;
+            CURRENT_TAG = TAG_PLAN;
             loadHomeFragment();
         }
     }
@@ -112,19 +114,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void setToolbarTitle() {
         toolbarTitle.setTypeface(TypeFaceHandler.getInstance(this).getFa_light());
         toolbarTitle.setText(titles[navItemIndex]);
-//        getSupportActionBar().setTitle("");
     }
 
     private Fragment getHomeFragment() {
         switch (navItemIndex) {
             case 0:
-                return ProfileFragment.newInstance();
-            // home
+                return PlanFragment.newInstance();
+            // plan
             case 1:
                 return ProfileFragment.newInstance();
             // receipts
             case 2:
-                // transactions
+                // profile
+                return ProfileFragment.newInstance();
+            case 3:
+                // settings
                 return ProfileFragment.newInstance();
             default:
                 return ProfileFragment.newInstance();
@@ -142,10 +146,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 R.drawable.ic_account_box_white_36dp, R.drawable.ic_settings_white_36dp};
 
         for (int i = 0; i < titles.length; i++) {
-            int direction = i < (titles.length / 2) ? ResideMenu.DIRECTION_LEFT : ResideMenu.DIRECTION_RIGHT;
             ResideMenuItem item = new ResideMenuItem(this, icon[i], titles[i]);
             item.setOnClickListener(this);
-            resideMenu.addMenuItem(item, direction);
+            resideMenu.addMenuItem(item, ResideMenu.DIRECTION_LEFT);
             resideMenuItemList.add(item);
         }
         resideMenu.setMenuListener(new ResideMenu.OnMenuListener() {
@@ -159,8 +162,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             }
         });
+        resideMenu.setSwipeDirectionDisable(ResideMenu.DIRECTION_RIGHT);
     }
-
 
     @Override
     public void onBackPressed() {
@@ -171,7 +174,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (shouldLoadHomeFragOnBackPress) {
             if (navItemIndex != 0) {
                 navItemIndex = 0;
-                CURRENT_TAG = TAG_CALENDAR;
+                CURRENT_TAG = TAG_PLAN;
                 loadHomeFragment();
                 return;
             }
@@ -182,7 +185,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
-        String tags[] = {TAG_CALENDAR, TAG_RECEIPT, TAG_PROFILE, TAG_SETTINGS};
+        String tags[] = {TAG_PLAN, TAG_RECEIPT, TAG_PROFILE, TAG_SETTINGS};
         for (int i = 0; i < resideMenuItemList.size(); i++)
             if (view == resideMenuItemList.get(i)) {
                 CURRENT_TAG = tags[i];

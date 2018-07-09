@@ -5,6 +5,9 @@
     <color name="colorAccent">#eca60f</color>
     <color name="darkGreen">#12b85a</color>
     <color name="backgroundColor">#e1e2e1</color>
+    <color name="status_available">#2ecc71</color>
+    <color name="status_unavailable">#34495e</color>
+    <color name="status_reserved">#e74c3c</color>
 
 
     <color name="colorBlackTrans">#a0000000</color>

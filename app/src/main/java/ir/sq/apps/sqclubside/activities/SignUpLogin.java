@@ -2,7 +2,6 @@ package ir.sq.apps.sqclubside.activities;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
@@ -36,6 +35,7 @@ import ir.sq.apps.sqclubside.R;
 import ir.sq.apps.sqclubside.controllers.UrlHandler;
 import ir.sq.apps.sqclubside.controllers.UserHandler;
 import ir.sq.apps.sqclubside.models.Club;
+import ir.sq.apps.sqclubside.models.Plan;
 import ir.sq.apps.sqclubside.models.Receipt;
 import ir.sq.apps.sqclubside.models.User;
 import ir.sq.apps.sqclubside.uiControllers.TypeFaceHandler;
@@ -263,7 +263,7 @@ public class SignUpLogin extends AppCompatActivity implements View.OnClickListen
                                     startActivity(new Intent(SignUpLogin.this, FormActivity.class));
                                 } else {
                                     if (UserHandler.getInstance().getThisUser().isVerified()) {
-                                        startActivity(new Intent(SignUpLogin.this, ClubProfileActivity.class));
+                                        startActivity(new Intent(SignUpLogin.this, MainActivity.class));
                                     } else {
                                         startActivity(new Intent(SignUpLogin.this, FormActivity.class));
                                     }
@@ -308,10 +308,16 @@ public class SignUpLogin extends AppCompatActivity implements View.OnClickListen
         String clubAddress = jsonObjectClub.getString("address");
         String clubOpeningTime = jsonObjectClub.getString("openingTime");
         String clubCloseTime = jsonObjectClub.getString("closingTime");
+        double clubLat = jsonObjectClub.getDouble("latitude");
+        double clubLong = jsonObjectClub.getDouble("longtitude");
         int clubType = jsonObjectClub.getInt("type");
         boolean isVerified = jsonObjectClub.getBoolean("verified");
         User user = new User(name, userName, email, password, isVerified);
         Club club = new Club(userName, clubName, name, clubTele, clubCell, clubAddress);
+        club.setType(clubType);
+        club.setLatitude(clubLat);
+        club.setLongtitude(clubLong);
+        setClubPlans(club, jsonObjectClub.getJSONArray("weeklyPlan"));
         JSONArray imagesJsonArray = jsonObjectClub.getJSONArray("images");
         JSONArray tagsJsonArray = jsonObjectClub.getJSONArray("tagList");
         JSONArray receiptsArray = object.getJSONArray("receipts");
@@ -327,6 +333,20 @@ public class SignUpLogin extends AppCompatActivity implements View.OnClickListen
         UserHandler.getInstance().setThisUser(user);
         UserHandler.getInstance().setmClub(club);
         return true;
+    }
+
+    private void setClubPlans(Club club, JSONArray plansArray) throws JSONException {
+        for (int j = 0; j < plansArray.length(); j++) {
+            JSONObject receiptObject = plansArray.getJSONObject(j);
+            int price = receiptObject.getInt("price");
+            int status = receiptObject.getInt("status");
+            int day = receiptObject.getInt("day");
+            long id = receiptObject.getLong("id");
+            String date = receiptObject.getString("date");
+            String time = receiptObject.getString("time");
+            Plan plan = new Plan(id, price, status, day, date, time);
+            club.addPlan(plan);
+        }
     }
 
     private void setReceipts(User user, JSONArray receiptsArray) throws JSONException {
