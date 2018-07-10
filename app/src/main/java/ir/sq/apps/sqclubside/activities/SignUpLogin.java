@@ -260,11 +260,13 @@ public class SignUpLogin extends AppCompatActivity implements View.OnClickListen
                             if (status == 1) {
                                 Log.i("SIGNIN", "Done");
                                 if (!createUser(response.getJSONObject("object"))) {
+                                    finish();
                                     startActivity(new Intent(SignUpLogin.this, FormActivity.class));
                                 } else {
                                     if (UserHandler.getInstance().getThisUser().isVerified()) {
                                         startActivity(new Intent(SignUpLogin.this, MainActivity.class));
                                     } else {
+                                        finish();
                                         startActivity(new Intent(SignUpLogin.this, FormActivity.class));
                                     }
                                 }
@@ -350,6 +352,7 @@ public class SignUpLogin extends AppCompatActivity implements View.OnClickListen
             String time = receiptObject.getString("time");
             Plan plan = new Plan(id, price, status, day, date, time);
             club.addPlan(plan);
+            Log.i("PLAn", "ADDED" + plan.getId());
         }
     }
 

@@ -34,7 +34,8 @@
             android:background="@drawable/background_round_radio_button"
             android:layoutDirection="rtl"
             android:padding="8dp"
-            android:text="@string/string_sans_reserve" />
+            android:text="@string/string_sans_reserve"
+            android:textColor="#FFF" />
 
         <RadioButton
             android:id="@+id/type_hour_radio_button"
@@ -46,7 +47,8 @@
             android:checked="true"
             android:layoutDirection="rtl"
             android:padding="8dp"
-            android:text="@string/string_hour_reserve" />
+            android:text="@string/string_hour_reserve"
+            android:textColor="#FFF" />
     </RadioGroup>
 
     <com.nex3z.togglebuttongroup.MultiSelectToggleGroup

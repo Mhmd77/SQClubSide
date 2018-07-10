@@ -54,6 +54,7 @@ public class RequestsHandler {
 
     public static boolean uploadImageTo(File file, String url) {
         final boolean[] success = new boolean[1];
+        Log.i("URL", url);
         AndroidNetworking.upload(url)
                 .addMultipartFile("photo", file)
                 .build()
@@ -123,6 +124,7 @@ public class RequestsHandler {
     }
 
     public static void updateClubTo(Club club, String url) {
+        Log.i("TAGS CLUB", club.getTags().size() + " ");
         AndroidNetworking.put(url)
                 .addJSONObjectBody(club.toJson())
                 .setPriority(Priority.HIGH)

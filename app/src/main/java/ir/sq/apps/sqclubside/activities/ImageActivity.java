@@ -100,6 +100,7 @@ public class ImageActivity extends AppCompatActivity implements ImagePreviewAdap
                 if (images.size() > 0) {
                     sendImagesToServer();
                 }
+                finish();
                 startActivity(new Intent(ImageActivity.this, TagsActivity.class));
                 break;
 

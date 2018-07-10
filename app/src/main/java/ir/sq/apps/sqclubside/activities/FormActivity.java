@@ -160,6 +160,7 @@ public class FormActivity extends AppCompatActivity {
 //                    sendUserToServer();
                     RequestsHandler.sendClubTo(UserHandler.getInstance().getmClub(), UrlHandler.createUserURL.getUrl());
                 }
+                finish();
                 startActivity(new Intent(FormActivity.this, ImageActivity.class));
                 break;
         }
